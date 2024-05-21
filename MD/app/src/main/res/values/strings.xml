@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Scan</string>
+    <string name="login">Login</string>
+    <string name="login_text">Please login to your account</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="signup_text">Don’t have an account?</string>
+    <string name="logout">Logout</string>
+    <string name="already_have_an_account">Already have an account</string>
+    <string name="let_s_started">Let\'s Started</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_an_account_sign_in">Already have an account?</string>
+    <string name="name">Name</string>
+    <string name="register">Register</string>
+    <string name="copyright_2024">Copyright © 2024</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="please_wait">Please Wait...</string>
+</resources>
