@@ -92,6 +92,69 @@
         android:layout_marginTop="30dp"
         android:background="@drawable/round_back_primary_15"/>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
+
+        <View
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#1A000000"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_toStartOf="@+id/orTxt"/>
+        
+        <TextView
+            android:id="@+id/orTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/or"
+            android:fontFamily="@font/poppins_semibold"
+            android:layout_centerInParent="true"
+            android:textSize="12sp"
+            android:textColor="#80000000"/>
+
+        <View
+            android:layout_centerVertical="true"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#1A000000"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/orTxt"/>
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:id="@+id/btnGoogle"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/round_back_dark_blue5_30"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/google_icon"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/log_in_with_google"
+            android:fontFamily="@font/poppins_bold"/>
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
