@@ -16,4 +16,6 @@
     <string name="title">Title</string>
     <string name="description">Description</string>
     <string name="please_wait">Please Wait...</string>
+    <string name="log_in_with_google">Log In with Google</string>
+    <string name="or">OR</string>
 </resources>
