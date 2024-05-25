@@ -12,12 +12,6 @@ class MainViewModel(
 ): ViewModel(){
     fun getToken() = pref.getToken().asLiveData()
 
-    fun setOnboardingCompleted(completed: Boolean) {
-        viewModelScope.launch {
-            pref.setOnboardingCompleted(completed)
-        }
-    }
-
     fun isOnboardingCompleted(): LiveData<Boolean> {
         return pref.isOnboardingCompleted().asLiveData()
     }

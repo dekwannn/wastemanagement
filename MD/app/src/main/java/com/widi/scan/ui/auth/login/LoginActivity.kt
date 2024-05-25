@@ -1,21 +1,28 @@
 package com.widi.scan.ui.auth.login
 
+
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import com.widi.scan.R
 import com.widi.scan.ui.main.ViewModelFactory
 import com.widi.scan.data.Result
 import com.widi.scan.databinding.ActivityLoginBinding
 import com.widi.scan.ui.auth.signup.SignUpActivity
+import com.widi.scan.ui.home.HomeActivity
 import com.widi.scan.ui.main.MainActivity
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+
     private val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
     private val loginViewModel: LoginViewModel by viewModels<LoginViewModel> {
         factory
@@ -25,7 +32,6 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val username = intent.getStringExtra("USERNAME")
 
         binding.apply {
             tvRegister.setOnClickListener{
@@ -43,6 +49,10 @@ class LoginActivity : AppCompatActivity() {
                 }else{
                     Toast.makeText(this@LoginActivity, "Please fill the form correctly", Toast.LENGTH_SHORT).show()
                 }
+            }
+
+            binding.btnGoogle.setOnClickListener {
+
             }
 
             val builder: AlertDialog.Builder = AlertDialog.Builder(this@LoginActivity)
@@ -63,8 +73,7 @@ class LoginActivity : AppCompatActivity() {
 
                     is Result.Success -> {
                         dialog.dismiss()
-                        val homeActivity = Intent(this@LoginActivity, MainActivity::class.java)
-                        homeActivity.putExtra("USERNAME", username)
+                        val homeActivity = Intent(this@LoginActivity, HomeActivity::class.java)
                         startActivity(homeActivity)
                         finish()
                     }

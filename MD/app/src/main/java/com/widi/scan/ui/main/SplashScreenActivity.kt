@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.widi.scan.R
 import com.widi.scan.ui.auth.login.LoginActivity
+import com.widi.scan.ui.home.HomeActivity
 import com.widi.scan.ui.onboarding.OnBoardingActivity
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -40,7 +41,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
                 mainViewModel.getToken().observe(this){
                         token ->
-                    val intentActivity = Intent(this, if (token == null) OnBoardingActivity::class.java else MainActivity::class.java)
+                    val intentActivity = Intent(this, if (token == null) OnBoardingActivity::class.java else HomeActivity::class.java)
                     startActivity(intentActivity)
                     finish()
                 }

@@ -12,7 +12,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiConfig {
     companion object{
-        var BASE_URL = BuildConfig.API_URL
         fun getApiService(preferences: UserPreference): ApiService {
             val loggingInterceptor = if(BuildConfig.DEBUG) {
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -32,7 +31,7 @@ class ApiConfig {
                 .addInterceptor(authInterceptor)
                 .build()
             val retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
+                .baseUrl("https://story-api.dicoding.dev/v1/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build()

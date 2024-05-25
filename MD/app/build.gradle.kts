@@ -1,5 +1,3 @@
-import java.io.FileInputStream
-import java.util.Properties
 
 plugins {
     alias(libs.plugins.androidApplication)
@@ -19,17 +17,6 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        val properties = Properties()
-        properties.load(FileInputStream(rootProject.file("local.properties")))
-
-        //return empty key in case something goes wrong
-        val apiUrl = properties.getProperty("apiUrl") ?: ""
-
-        buildConfigField(
-            type = "String",
-            name = "API_URL",
-            value = "\"$apiUrl\""
-        )
     }
 
     buildTypes {

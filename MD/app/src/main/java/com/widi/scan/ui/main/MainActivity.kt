@@ -21,9 +21,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val username = intent.getStringExtra("USERNAME")
-
-        binding.textView3.text = username
 
         val intentLogout = Intent(this@MainActivity, LoginActivity::class.java)
         binding.logoutButton.setOnClickListener {
