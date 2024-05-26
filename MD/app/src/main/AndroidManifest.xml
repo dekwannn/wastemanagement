@@ -15,6 +15,12 @@
         android:theme="@style/Theme.Scan"
         tools:targetApi="31">
         <activity
+            android:name=".ui.camera.CameraActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.scan.ScanActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.home.HomeActivity"
             android:exported="false" />
         <activity
