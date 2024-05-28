@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -14,29 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Scan"
         tools:targetApi="31">
-        <activity
-            android:name=".ui.camera.CameraActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.scan.ScanActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.home.HomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.auth.signup.SignUpActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.auth.login.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.onboarding.OnBoardingActivity"
-            android:exported="false" />
+
         <activity
             android:name=".ui.main.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.main.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

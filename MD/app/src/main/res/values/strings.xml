@@ -30,4 +30,12 @@
     <string name="result">Result</string>
     <string name="failed_to_pick_image">Failed to pick image\n</string>
     <string name="empty_image_warning">Please choose the image first</string>
+    <string name="categories">Category</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings\n</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="personalization">Personalization</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="language">Language</string>
 </resources>
