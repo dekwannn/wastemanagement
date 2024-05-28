@@ -14,8 +14,6 @@ import com.widi.scan.R
 import com.widi.scan.ui.main.ViewModelFactory
 import com.widi.scan.data.Result
 import com.widi.scan.databinding.FragmentLoginBinding
-import com.widi.scan.ui.auth.signup.SignUpActivity
-import com.widi.scan.ui.home.HomeActivity
 import com.widi.scan.ui.settings.SettingsFragmentDirections
 import com.widi.scan.ui.utils.safeNavigate
 

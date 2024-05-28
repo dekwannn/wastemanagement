@@ -2,7 +2,6 @@ package com.widi.scan.ui.onboarding
 
 import OnBoardingViewPagerAdapter
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import com.tbuonomo.viewpagerdotsindicator.WormDotsIndicator
 import com.widi.scan.R
 import com.widi.scan.databinding.FragmentOnBoardingBinding
 import com.widi.scan.model.OnBoarding
-import com.widi.scan.ui.auth.login.LoginActivity
-import com.widi.scan.ui.auth.signup.SignUpActivity
 
 class OnBoardingFragment : Fragment() {
 

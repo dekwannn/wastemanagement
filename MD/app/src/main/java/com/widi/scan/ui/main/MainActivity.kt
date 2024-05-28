@@ -10,7 +10,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.widi.scan.R
 import com.widi.scan.databinding.ActivityMainBinding
-import com.widi.scan.ui.auth.login.LoginActivity
 
 class MainActivity : AppCompatActivity() {
 
