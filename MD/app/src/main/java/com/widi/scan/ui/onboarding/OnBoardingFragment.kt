@@ -1,7 +1,6 @@
 package com.widi.scan.ui.onboarding
 
 import OnBoardingViewPagerAdapter
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.widi.scan.R
+import com.widi.scan.data.pref.UserPreference
 import com.widi.scan.databinding.FragmentOnBoardingBinding
 import com.widi.scan.model.OnBoarding
 
@@ -17,6 +17,7 @@ class OnBoardingFragment : Fragment() {
 
     private lateinit var onBoardingViewPagerAdapter: OnBoardingViewPagerAdapter
     private lateinit var binding: FragmentOnBoardingBinding
+    private lateinit var userPreferences: UserPreference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +29,8 @@ class OnBoardingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        userPreferences = UserPreference(requireContext())
 
         val onBoardingData: MutableList<OnBoarding> = ArrayList()
         onBoardingData.add(OnBoarding("Welcome to SCAN", "Find and identify types of waste easily and accurately through image scanning",
@@ -75,20 +78,12 @@ class OnBoardingFragment : Fragment() {
         })
 
         binding.btnLogin.setOnClickListener {
-            val sharedPref = requireActivity().getSharedPreferences("onboarding", Context.MODE_PRIVATE)
-            val editor = sharedPref.edit()
-            editor.putBoolean("isFinished", true)
-            editor.apply()
-
-            findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
+            userPreferences.setOnboardingComplete(true)
+            findNavController().navigate(R.id.action_onBoardingFragment_to_loginFragment)
         }
 
         binding.btnRegister.setOnClickListener {
-            val sharedPref = requireActivity().getSharedPreferences("onboarding", Context.MODE_PRIVATE)
-            val editor = sharedPref.edit()
-            editor.putBoolean("isFinished", true)
-            editor.apply()
-
+            userPreferences.setOnboardingComplete(true)
             findNavController().navigate(R.id.action_onBoardingFragment_to_signUpFragment)
         }
     }

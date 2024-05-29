@@ -18,7 +18,7 @@
     <string name="please_wait">Please Wait...</string>
     <string name="log_in_with_google">Log In with Google</string>
     <string name="or">OR</string>
-    <string name="your_web_client_id">93631640445-fvqq01iqoh5p2606n9ocm05ntbiq7tqe.apps.googleusercontent.com</string>
+    <string name="your_web_client_id">882596255532-e98kmg35b29cian8up0mk2ai102ekeri.apps.googleusercontent.com</string>
     <string name="hello">Hello,</string>
     <string name="username">Username</string>
     <string name="featured">Featured</string>
@@ -38,4 +38,7 @@
     <string name="personalization">Personalization</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="language">Language</string>
+    <string name="recycle">Recycle\n</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua......</string>
+    <string name="percentage">50%</string>
 </resources>

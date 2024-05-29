@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "882596255532",
+    "project_id": "scanapp-64882",
+    "storage_bucket": "scanapp-64882.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:882596255532:android:465ce4fe58b447eea57e89",
+        "android_client_info": {
+          "package_name": "com.widi.scan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "882596255532-e98kmg35b29cian8up0mk2ai102ekeri.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbFwBnTD5ezr3kwM2VABWYcp3DnJnZqqM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "882596255532-e98kmg35b29cian8up0mk2ai102ekeri.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

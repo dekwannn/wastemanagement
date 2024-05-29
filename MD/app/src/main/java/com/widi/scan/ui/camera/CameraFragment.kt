@@ -19,7 +19,9 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.widi.scan.databinding.FragmentCameraBinding
+import com.widi.scan.databinding.BottomSheetDialogBinding
 import com.widi.scan.ui.utils.createCustomTempFile
 
 class CameraFragment : Fragment() {
@@ -29,6 +31,7 @@ class CameraFragment : Fragment() {
 
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var imageCapture: ImageCapture? = null
+    private var cameraProvider: ProcessCameraProvider? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,36 +61,49 @@ class CameraFragment : Fragment() {
         startCamera()
     }
 
+    override fun onPause() {
+        super.onPause()
+        stopCamera()
+    }
+
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
         cameraProviderFuture.addListener({
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-            val preview = Preview.Builder()
-                .build()
-                .also {
-                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
-                }
-
-            imageCapture = ImageCapture.Builder().build()
-
-            try {
-                cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(
-                    viewLifecycleOwner,
-                    cameraSelector,
-                    preview,
-                    imageCapture
-                )
-            } catch (exc: Exception) {
-                Toast.makeText(
-                    requireContext(),
-                    "Failed to load camera",
-                    Toast.LENGTH_SHORT
-                ).show()
-                Log.e(TAG, "startCamera: ${exc.message}")
-            }
+            cameraProvider = cameraProviderFuture.get()
+            bindCameraUseCases()
         }, ContextCompat.getMainExecutor(requireContext()))
+    }
+
+    private fun bindCameraUseCases() {
+        val preview = Preview.Builder()
+            .build()
+            .also {
+                it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+            }
+
+        imageCapture = ImageCapture.Builder().build()
+
+        try {
+            cameraProvider?.unbindAll()
+            cameraProvider?.bindToLifecycle(
+                viewLifecycleOwner,
+                cameraSelector,
+                preview,
+                imageCapture
+            )
+        } catch (exc: Exception) {
+            Toast.makeText(
+                requireContext(),
+                "Failed to load camera",
+                Toast.LENGTH_SHORT
+            ).show()
+            Log.e(TAG, "startCamera: ${exc.message}")
+        }
+    }
+
+    private fun stopCamera() {
+        cameraProvider?.unbindAll()
     }
 
     private fun takePhoto() {
@@ -137,9 +153,13 @@ class CameraFragment : Fragment() {
     private val orientationEventListener by lazy {
         object : OrientationEventListener(requireContext()) {
             override fun onOrientationChanged(orientation: Int) {
-                if (orientation == Surface.ROTATION_0 || orientation == Surface.ROTATION_90 || orientation == Surface.ROTATION_180 || orientation == Surface.ROTATION_270) {
-                    imageCapture?.targetRotation = orientation
+                val rotation = when (orientation) {
+                    in 45..134 -> Surface.ROTATION_270
+                    in 135..224 -> Surface.ROTATION_180
+                    in 225..314 -> Surface.ROTATION_90
+                    else -> Surface.ROTATION_0
                 }
+                imageCapture?.targetRotation = rotation
             }
         }
     }

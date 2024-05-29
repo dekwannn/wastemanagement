@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         binding.navView.setupWithNavController(navHostController)
 
         navHostController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.splashScreenFragment || destination.id == R.id.onBoardingFragment
+            if (destination.id == R.id.splashScreenFragment || destination.id == R.id.onBoardingFragment || destination.id == R.id.scanFragment
                 || destination.id == R.id.loginFragment || destination.id == R.id.signUpFragment || destination.id == R.id.cameraFragment)
             {
                 binding.navView.visibility = View.GONE

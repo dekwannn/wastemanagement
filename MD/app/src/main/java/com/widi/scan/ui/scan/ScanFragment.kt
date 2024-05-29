@@ -1,7 +1,7 @@
 package com.widi.scan.ui.scan
 
 import android.Manifest
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
@@ -12,12 +12,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.widi.scan.R
+import com.widi.scan.databinding.BottomSheetDialogBinding
 import com.widi.scan.databinding.FragmentScanBinding
-import com.widi.scan.ui.camera.CameraActivity
-import com.widi.scan.ui.camera.CameraActivity.Companion.CAMERAX_RESULT
 import com.widi.scan.ui.camera.CameraFragment
-import com.widi.scan.ui.settings.SettingsFragmentDirections
+import com.widi.scan.ui.camera.CameraFragment.Companion.CAMERAX_RESULT
 import com.widi.scan.ui.utils.safeNavigate
 
 class ScanFragment : Fragment(R.layout.fragment_scan) {
@@ -63,7 +63,7 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
                     showToast(getString(R.string.empty_image_warning))
                     return@setOnClickListener
                 }
-                // Implement your result logic here
+                showBottomSheetDialog()
             }
         }
     }
@@ -89,6 +89,7 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
     }
 
     private fun startCamera() {
+        launcherIntentCamera
         findNavController().safeNavigate(
             ScanFragmentDirections.actionScanFragmentToCameraFragment())
     }
@@ -99,7 +100,7 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
         if (result.resultCode == CAMERAX_RESULT) {
             val data = result.data
             if (data != null) {
-                currentImageUri = data.getStringExtra(CameraActivity.EXTRA_CAMERA_IMAGE)?.toUri()
+                currentImageUri = data.getStringExtra(CameraFragment.EXTRA_CAMERA_IMAGE)?.toUri()
                 showImage()
             }
         }
@@ -112,6 +113,17 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    
+    private fun showBottomSheetDialog() {
+        val binding = BottomSheetDialogBinding.inflate(layoutInflater)
+        val dialog = BottomSheetDialog(requireContext())
+        dialog.setContentView(binding.root)
+
+        binding.cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
     companion object {

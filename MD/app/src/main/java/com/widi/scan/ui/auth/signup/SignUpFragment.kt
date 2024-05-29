@@ -1,80 +1,63 @@
 package com.widi.scan.ui.auth.signup
 
-import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.widi.scan.R
-import com.widi.scan.data.Result
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.widi.scan.databinding.FragmentSignUpBinding
-import com.widi.scan.ui.auth.login.LoginFragment
-import com.widi.scan.ui.main.ViewModelFactory
+import com.widi.scan.ui.utils.safeNavigate
 
 class SignUpFragment : Fragment() {
 
-    private lateinit var binding: FragmentSignUpBinding
-    private val factory: ViewModelFactory by lazy {
-        ViewModelFactory.getInstance(requireActivity())
-    }
-    private val signupViewModel: SignUpViewModel by viewModels {
-        factory
-    }
+    private var _binding: FragmentSignUpBinding? = null
+    private val binding get() = _binding
+
+    private lateinit var auth: FirebaseAuth
+
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentSignUpBinding.inflate(inflater, container, false)
-        return binding.root
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentSignUpBinding.inflate(inflater, container, false)
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        auth = Firebase.auth
 
-        binding.apply {
-            tvLogin.setOnClickListener {
-                findNavController().navigate(R.id.action_signUpFragment_to_loginFragment)
-            }
-
+        binding?.apply {
             btnRegister.setOnClickListener {
-                if (edRegisterEmail.text.isNotEmpty() && edRegisterName.text.isNotEmpty() && edRegisterPassword.text?.length!! >= 8) {
-                    signupViewModel.submitRegister(
-                        name = edRegisterName.text.toString(),
-                        email = edRegisterEmail.text.toString(),
-                        password = edRegisterPassword.text.toString()
-                    )
-                } else {
-                    Toast.makeText(requireContext(), "Please fill the form correctly", Toast.LENGTH_SHORT).show()
-                }
+                firebaseRegister(binding)
             }
-
-            val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-            builder.setView(R.layout.loading)
-            val dialog: AlertDialog = builder.create()
-
-            signupViewModel.responseResult.observe(viewLifecycleOwner) { response ->
-                when (response) {
-                    is Result.Loading -> dialog.show()
-                    is Result.Error -> {
-                        dialog.dismiss()
-                        Toast.makeText(requireContext(), response.error, Toast.LENGTH_SHORT).show()
-                    }
-
-                    is Result.Success -> {
-                        dialog.dismiss()
-                        findNavController().navigate(R.id.action_signUpFragment_to_loginFragment, Bundle().apply {
-                        })
-                    }
-
-                    else -> dialog.dismiss()
-                }
+            tvLogin.setOnClickListener {
+                findNavController().safeNavigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
             }
         }
+    }
+
+    private fun firebaseRegister(binding: FragmentSignUpBinding?) {
+        val name = binding?.edRegisterName?.text.toString()
+        val email = binding?.edRegisterEmail?.text.toString()
+        val password = binding?.edRegisterPassword?.text.toString()
+
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                findNavController().safeNavigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
+            } else {
+                Toast.makeText(context, "Registration Failed", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        _binding = null
     }
 }

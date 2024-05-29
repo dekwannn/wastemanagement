@@ -10,35 +10,34 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.widi.scan.R
+import com.widi.scan.data.pref.UserPreference
 
 class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
 
-    private val factory: ViewModelFactory by lazy { ViewModelFactory.getInstance(requireContext()) }
-    private val mainViewModel: MainViewModel by viewModels {
-        factory
-    }
+    private lateinit var userPreferences: UserPreference
+    private lateinit var auth: FirebaseAuth
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Handler(Looper.getMainLooper()).postDelayed(
-            {
-                mainViewModel.getToken().observe(viewLifecycleOwner) { token ->
-                    if (token != null) {
-                        findNavController().navigate(R.id.action_splashScreenFragment_to_homeFragment)
-                    } else {
-                        mainViewModel.isOnboardingCompleted().observe(viewLifecycleOwner) { onboardingCompleted ->
-                            if (!onboardingCompleted) {
-                                findNavController().navigate(R.id.action_splashScreenFragment_to_onBoardingFragment)
-                            } else {
-                                findNavController().navigate(R.id.action_splashScreenFragment_to_homeFragment)
-                            }
-                        }
-                    }
+
+        userPreferences = UserPreference(requireContext())
+        auth = FirebaseAuth.getInstance()
+
+        view.postDelayed({
+            when {
+                auth.currentUser != null -> {
+                    findNavController().navigate(R.id.action_splashScreenFragment_to_homeFragment)
                 }
-            },
-            SPLASH_TIME_OUT
-        )
+                userPreferences.isOnboardingComplete() -> {
+                    findNavController().navigate(R.id.action_splashScreenFragment_to_loginFragment)
+                }
+                else -> {
+                    findNavController().navigate(R.id.action_splashScreenFragment_to_onBoardingFragment)
+                }
+            }
+        }, SPLASH_TIME_OUT)
     }
 
 
