@@ -69,6 +69,10 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
                 }
                 classifyImage()
             }
+
+            btnBack.setOnClickListener {
+                findNavController().safeNavigate(ScanFragmentDirections.actionScanFragmentToHomeFragment())
+            }
         }
     }
 
@@ -117,7 +121,6 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
             val preprocessedImage = wasteModel.preprocessImage(bitmap)
             val result = wasteModel.classify(preprocessedImage)
 
-            // Display the result in a bottom sheet dialog
             showBottomSheetDialog(result)
         }
     }
@@ -127,7 +130,6 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
         val dialog = BottomSheetDialog(requireContext())
         dialog.setContentView(binding.root)
 
-        // Use the actual labels from your model
         val labels = listOf("BATTERY", "BIOLOGICAL", "CLOTHES", "CARDBOARD", "GLASS", "METAL", "PAPER", "PLASTIC", "NON_RECYCLE", "SHOES")
         val maxIndex = result.indices.maxByOrNull { result[it] } ?: -1
         val maxLabel = labels.getOrNull(maxIndex) ?: "Unknown"
@@ -135,7 +137,6 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
 
         binding.resultPercentage.text = "$maxConfidence%"
         binding.resultRecycle.text = maxLabel
-        binding.resultCategory.text = maxLabel
         binding.textDescription.text = "Description of $maxLabel" // Adjust this line based on your use case
 
         binding.cancelButton.setOnClickListener {

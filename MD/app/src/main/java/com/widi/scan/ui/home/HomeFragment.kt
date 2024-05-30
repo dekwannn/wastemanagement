@@ -1,6 +1,5 @@
 package com.widi.scan.ui.home
 
-import android.net.Uri
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,7 +15,6 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.widi.scan.R
 import com.widi.scan.databinding.FragmentHomeBinding
-import com.widi.scan.ui.settings.SettingsFragmentDirections
 import com.widi.scan.ui.utils.safeNavigate
 
 

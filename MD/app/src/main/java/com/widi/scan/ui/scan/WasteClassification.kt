@@ -16,7 +16,7 @@ import java.nio.channels.FileChannel
 class WasteClassification(context: Context) {
 
     private val interpreter: Interpreter
-    private val inputImageWidth: Int = 224 // Replace with your model input size
+    private val inputImageWidth: Int = 224
     private val inputImageHeight: Int = 224
     private val inputChannels: Int = 3
 

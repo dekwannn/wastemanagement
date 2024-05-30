@@ -8,7 +8,6 @@
     android:background="@drawable/bg2"
     tools:context=".ui.home.HomeFragment">
 
-    <!-- RelativeLayout yang tidak ikut bergerak saat discroll -->
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"

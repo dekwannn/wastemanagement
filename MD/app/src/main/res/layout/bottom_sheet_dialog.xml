@@ -70,21 +70,13 @@
                 android:id="@+id/resultRecycle"
                 android:layout_width="wrap_content"
                 android:layout_height="29dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="@string/recycle"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/resultCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins_semibold"
-                android:text="@string/categories"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 
