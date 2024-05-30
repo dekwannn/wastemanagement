@@ -1,8 +1,9 @@
 package com.widi.scan.ui.scan
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -19,6 +20,7 @@ import com.widi.scan.databinding.FragmentScanBinding
 import com.widi.scan.ui.camera.CameraFragment
 import com.widi.scan.ui.camera.CameraFragment.Companion.CAMERAX_RESULT
 import com.widi.scan.ui.utils.safeNavigate
+import java.io.InputStream
 
 class ScanFragment : Fragment(R.layout.fragment_scan) {
 
@@ -26,6 +28,7 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
     private val binding get() = _binding!!
 
     private var currentImageUri: Uri? = null
+    private lateinit var wasteModel: WasteClassification
 
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(
@@ -49,6 +52,7 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
         if (!allPermissionsGranted()) {
             requestPermissionLauncher.launch(REQUIRED_PERMISSION)
         }
+        wasteModel = WasteClassification(requireContext())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,11 +63,11 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
             buttonGallery.setOnClickListener { startGallery() }
             buttonCamera.setOnClickListener { startCamera() }
             buttonResult.setOnClickListener {
-                if (imagePreview.toString().isEmpty()) {
+                if (currentImageUri == null) {
                     showToast(getString(R.string.empty_image_warning))
                     return@setOnClickListener
                 }
-                showBottomSheetDialog()
+                classifyImage()
             }
         }
     }
@@ -106,6 +110,40 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
         }
     }
 
+    private fun classifyImage() {
+        currentImageUri?.let { uri ->
+            val inputStream: InputStream? = requireContext().contentResolver.openInputStream(uri)
+            val bitmap = BitmapFactory.decodeStream(inputStream)
+            val preprocessedImage = wasteModel.preprocessImage(bitmap)
+            val result = wasteModel.classify(preprocessedImage)
+
+            // Display the result in a bottom sheet dialog
+            showBottomSheetDialog(result)
+        }
+    }
+
+    private fun showBottomSheetDialog(result: FloatArray) {
+        val binding = BottomSheetDialogBinding.inflate(layoutInflater)
+        val dialog = BottomSheetDialog(requireContext())
+        dialog.setContentView(binding.root)
+
+        // Use the actual labels from your model
+        val labels = listOf("BATTERY", "BIOLOGICAL", "CLOTHES", "CARDBOARD", "GLASS", "METAL", "PAPER", "PLASTIC", "NON_RECYCLE", "SHOES")
+        val maxIndex = result.indices.maxByOrNull { result[it] } ?: -1
+        val maxLabel = labels.getOrNull(maxIndex) ?: "Unknown"
+        val maxConfidence = result.getOrNull(maxIndex)?.times(100)?.toInt() ?: 0
+
+        binding.resultPercentage.text = "$maxConfidence%"
+        binding.resultRecycle.text = maxLabel
+        binding.resultCategory.text = maxLabel
+        binding.textDescription.text = "Description of $maxLabel" // Adjust this line based on your use case
+
+        binding.cancelButton.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
@@ -113,17 +151,6 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-    
-    private fun showBottomSheetDialog() {
-        val binding = BottomSheetDialogBinding.inflate(layoutInflater)
-        val dialog = BottomSheetDialog(requireContext())
-        dialog.setContentView(binding.root)
-
-        binding.cancelButton.setOnClickListener {
-            dialog.dismiss()
-        }
-        dialog.show()
     }
 
     companion object {

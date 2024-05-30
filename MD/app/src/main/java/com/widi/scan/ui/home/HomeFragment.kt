@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
         val slideUp = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up)
 
         binding?.relativeLayout?.startAnimation(fadeIn)
-        binding?.scrollView?.startAnimation(slideUp)
+        binding?.scrollView?.startAnimation(fadeIn)
 
         binding?.apply {
             btnScan.setOnClickListener {
@@ -65,9 +65,6 @@ class HomeFragment : Fragment() {
             }
             btnHistory.setOnClickListener {
                 findNavController().safeNavigate(HomeFragmentDirections.actionHomeFragmentToHistoryFragment())
-            }
-            btnSeeall.setOnClickListener {
-                logout()
             }
         }
 

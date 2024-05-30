@@ -9,9 +9,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.widi.scan" />
-                  <option name="mobileSdkAppId" value="1:882596255532:android:465ce4fe58b447eea57e89" />
-                  <option name="projectId" value="scanapp-64882" />
-                  <option name="projectNumber" value="882596255532" />
+                  <option name="mobileSdkAppId" value="1:597489190587:android:5a5e04a32ea30774448b9e" />
+                  <option name="projectId" value="scanapp-49e55" />
+                  <option name="projectNumber" value="597489190587" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
