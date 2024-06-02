@@ -19,9 +19,7 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.widi.scan.databinding.FragmentCameraBinding
-import com.widi.scan.databinding.BottomSheetDialogBinding
 import com.widi.scan.ui.utils.createCustomTempFile
 
 class CameraFragment : Fragment() {
