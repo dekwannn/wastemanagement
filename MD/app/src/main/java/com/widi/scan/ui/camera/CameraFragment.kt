@@ -185,3 +185,5 @@ class CameraFragment : Fragment() {
         const val CAMERAX_RESULT = 200
     }
 }
+
+
