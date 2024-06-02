@@ -1,6 +1,5 @@
 package com.widi.scan.ui.settings
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -30,6 +29,10 @@ class SettingsFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         auth = Firebase.auth
+        val currentUser = auth.currentUser
+        val userEmail = currentUser?.email ?: "Unknown"
+
+        binding?.email?.text = userEmail
 
         binding?.btnLogout?.setOnClickListener {
             logout()

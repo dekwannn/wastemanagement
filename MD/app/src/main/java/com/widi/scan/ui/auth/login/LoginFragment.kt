@@ -2,7 +2,6 @@ package com.widi.scan.ui.auth.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -119,7 +118,6 @@ class LoginFragment : Fragment() {
                 updateUI(account)
             }
         } catch (e: ApiException) {
-            Log.e("LoginFragment", "Error signing in with Google: ${e.statusCode}", e)
             Toast.makeText(context, "Error signing in with Google: ${e.statusCode}", Toast.LENGTH_SHORT).show()
         }
     }

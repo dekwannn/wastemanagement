@@ -21,7 +21,7 @@ class WasteClassification(context: Context) {
     private val inputChannels: Int = 3
 
     init {
-        val model = loadModelFile(context, "model.tflite")
+        val model = loadModelFile(context, "model2.tflite")
         interpreter = Interpreter(model)
     }
 

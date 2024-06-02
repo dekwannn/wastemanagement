@@ -5,6 +5,10 @@ agp = "8.3.2"
 datastorePreferences = "1.1.1"
 dotsindicator = "5.0"
 exifinterface = "1.3.7"
+firebaseFirestore = "25.0.0"
+glide = "4.16.0"
+googlePlayServicesMaps = "18.0.2"
+guava = "31.1-jre"
 kotlin = "1.9.21"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -17,7 +21,9 @@ material = "1.12.0"
 activity = "1.9.0"
 constraintlayout = "2.1.4"
 material3Common = "1.0.0-alpha01"
+playServicesLocation = "21.3.0"
 retrofit = "2.10.0"
+roomRuntime = "2.6.1"
 viewpager2 = "1.1.0"
 navigationFragmentKtx = "2.7.7"
 navigationUiKtx = "2.7.7"
@@ -33,6 +39,11 @@ firebaseAuth = "23.0.0"
 playServicesAuth = "21.2.0"
 credentials = "1.2.2"
 googleid = "1.2.2"
+googleServicesVersion = "4.4.2"
+googleAndroidLibrariesMapsplatformSecretsGradlePlugin = "2.0.1"
+playServicesMaps = "18.2.0"
+places = "3.5.0"
+ksp = "1.9.21-1.0.15"
 
 
 [libraries]
@@ -45,9 +56,15 @@ androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-lived
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-material3-common = { module = "androidx.compose.material3:material3-common", version.ref = "material3Common" }
 androidx-navigation-safe-args-gradle-plugin = { module = "androidx.navigation:navigation-safe-args-gradle-plugin", version.ref = "navigationFragmentKtx" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 androidx-viewpager2 = { module = "androidx.viewpager2:viewpager2", version.ref = "viewpager2" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 dotsindicator = { module = "com.tbuonomo:dotsindicator", version.ref = "dotsindicator" }
+firebase-firestore = { module = "com.google.firebase:firebase-firestore", version.ref = "firebaseFirestore" }
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -58,6 +75,8 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
+play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
+play-services-maps-v1802 = { module = "com.google.android.gms:play-services-maps", version.ref = "googlePlayServicesMaps" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 androidx-camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "cameraView" }
 androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "cameraxVersion" }
@@ -73,7 +92,12 @@ play-services-auth = { module = "com.google.android.gms:play-services-auth", ver
 androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "credentials" }
 androidx-credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentials" }
 googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
+gms-google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServicesVersion" }
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
+places = { group = "com.google.android.libraries.places", name = "places", version.ref = "places" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+googleAndroidLibrariesMapsplatformSecretsGradlePlugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "googleAndroidLibrariesMapsplatformSecretsGradlePlugin" }

@@ -2,7 +2,6 @@ package com.widi.scan.ui.scan
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -12,13 +11,19 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.widi.scan.R
+import com.widi.scan.data.ScanRepository
+import com.widi.scan.data.local.HistoryEntity
 import com.widi.scan.databinding.BottomSheetDialogBinding
 import com.widi.scan.databinding.FragmentScanBinding
 import com.widi.scan.ui.camera.CameraFragment
 import com.widi.scan.ui.camera.CameraFragment.Companion.CAMERAX_RESULT
+import com.widi.scan.ui.database.HistoryDatabase
+import com.widi.scan.ui.history.HistoryViewModel
+import com.widi.scan.ui.history.HistoryViewModelFactory
 import com.widi.scan.ui.utils.safeNavigate
 import java.io.InputStream
 
@@ -26,14 +31,14 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
 
     private var _binding: FragmentScanBinding? = null
     private val binding get() = _binding!!
-
     private var currentImageUri: Uri? = null
     private lateinit var wasteModel: WasteClassification
+    private lateinit var historyViewModel: HistoryViewModel
 
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(
             requireContext(),
-            REQUIRED_PERMISSION
+            Manifest.permission.ACCESS_FINE_LOCATION
         ) == PackageManager.PERMISSION_GRANTED
 
     private val requestPermissionLauncher =
@@ -50,9 +55,14 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (!allPermissionsGranted()) {
-            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
+            requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
         wasteModel = WasteClassification(requireContext())
+
+        val dao = HistoryDatabase.getDatabase(requireContext()).historyDao()
+        val repository = ScanRepository(dao)
+        val factory = HistoryViewModelFactory(repository)
+        historyViewModel = ViewModelProvider(this, factory).get(HistoryViewModel::class.java)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -121,8 +131,29 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
             val preprocessedImage = wasteModel.preprocessImage(bitmap)
             val result = wasteModel.classify(preprocessedImage)
 
+            val labels = listOf("BATTERY", "BIOLOGICAL", "CLOTHES", "CARDBOARD", "GLASS", "METAL", "PAPER", "PLASTIC", "NON_RECYCLE", "SHOES")
+            val maxIndex = result.indices.maxByOrNull { result[it] } ?: -1
+            val maxLabel = labels.getOrNull(maxIndex) ?: "Unknown"
+            val maxConfidence = result.getOrNull(maxIndex)?.times(100)?.toInt() ?: 0
+            val timestamp = System.currentTimeMillis()
+
+            // Save to database
+            saveClassificationToDatabase(uri.toString(), maxLabel, timestamp, maxConfidence)
+
+            // Show result in bottom sheet dialog
             showBottomSheetDialog(result)
         }
+    }
+
+    private fun saveClassificationToDatabase(imageUri: String, label: String, timestamp: Long, confidence: Int) {
+        val history = HistoryEntity(
+            imageUri = imageUri,
+            label = label,
+            timestamp = timestamp,
+            confidence = confidence
+        )
+
+        historyViewModel.insert(history)
     }
 
     private fun showBottomSheetDialog(result: FloatArray) {
@@ -137,7 +168,12 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
 
         binding.resultPercentage.text = "$maxConfidence%"
         binding.resultRecycle.text = maxLabel
-        binding.textDescription.text = "Description of $maxLabel" // Adjust this line based on your use case
+        binding.textDescription.text = "Description of $maxLabel"
+
+        binding.btnRecommendation.setOnClickListener {
+            findNavController().safeNavigate(ScanFragmentDirections.actionScanFragmentToMapsFragment())
+            dialog.dismiss()
+        }
 
         binding.cancelButton.setOnClickListener {
             dialog.dismiss()

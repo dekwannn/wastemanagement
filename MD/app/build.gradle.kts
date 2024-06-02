@@ -2,8 +2,11 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("kotlin-parcelize")
     id("androidx.navigation.safeargs")
     id("com.google.gms.google-services")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.googleAndroidLibrariesMapsplatformSecretsGradlePlugin)
 }
 
 android {
@@ -63,6 +66,8 @@ dependencies {
     implementation(libs.androidx.legacy.support.v4)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.firebase.auth)
+    implementation(libs.play.services.maps)
+    implementation(libs.places)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -89,11 +94,21 @@ dependencies {
     implementation(libs.androidx.camera.lifecycle)
     implementation(libs.androidx.camera.view)
 
+    implementation(libs.guava)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.glide)
+
 
 
     implementation(libs.play.services.auth)
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.firebase.firestore)
 //    implementation(libs.googleid)
+
+    implementation (libs.play.services.maps.v1802)
+    implementation (libs.play.services.location)
 
 }

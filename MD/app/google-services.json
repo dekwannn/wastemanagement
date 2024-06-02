@@ -12,7 +12,12 @@
           "package_name": "com.widi.scan"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "597489190587-1gfmgo447bfq16mr3ss5nvjavradr1jl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAESM8XNjSjJa7CWb1B5KXojaAwA0QeMlY"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "597489190587-1gfmgo447bfq16mr3ss5nvjavradr1jl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         navHostController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.splashScreenFragment || destination.id == R.id.onBoardingFragment || destination.id == R.id.scanFragment
-                || destination.id == R.id.loginFragment || destination.id == R.id.signUpFragment || destination.id == R.id.cameraFragment)
+                || destination.id == R.id.loginFragment || destination.id == R.id.signUpFragment || destination.id == R.id.cameraFragment || destination.id == R.id.mapsFragment)
             {
                 binding.navView.visibility = View.GONE
             } else {

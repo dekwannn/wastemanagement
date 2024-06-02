@@ -42,11 +42,7 @@ class HomeFragment : Fragment() {
 
         auth = Firebase.auth
 
-        val username = arguments?.getString("username")
-        binding?.tvUsername?.text = username
-
         val fadeIn = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in)
-        val slideUp = AnimationUtils.loadAnimation(requireContext(), R.anim.slide_up)
 
         binding?.relativeLayout?.startAnimation(fadeIn)
         binding?.scrollView?.startAnimation(fadeIn)

@@ -14,7 +14,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/onboarding1" />
+        app:srcCompat="@drawable/onboarding1"
+        android:contentDescription="@string/image" />
 
     <TextView
         android:id="@+id/tvTitle"

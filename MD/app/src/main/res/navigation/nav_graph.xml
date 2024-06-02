@@ -100,6 +100,9 @@
         <action
             android:id="@+id/action_scanFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_scanFragment_to_mapsFragment"
+            app:destination="@id/mapsFragment" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
@@ -120,4 +123,9 @@
             android:id="@+id/action_settingsFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.widi.scan.ui.map.MapsFragment"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_maps" />
 </navigation>
