@@ -1,14 +1,12 @@
 package com.widi.scan.ui.camera
 
-import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.OrientationEventListener
 import android.view.Surface
 import android.view.View
-import android.view.ViewGroup
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -19,37 +17,30 @@ import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.widi.scan.R
 import com.widi.scan.databinding.FragmentCameraBinding
 import com.widi.scan.ui.utils.createCustomTempFile
+import java.io.File
 
-class CameraFragment : Fragment() {
+class CameraFragment : Fragment(R.layout.fragment_camera) {
 
     private var _binding: FragmentCameraBinding? = null
     private val binding get() = _binding!!
-
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     private var imageCapture: ImageCapture? = null
-    private var cameraProvider: ProcessCameraProvider? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentCameraBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+    private lateinit var cameraProvider: ProcessCameraProvider
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentCameraBinding.bind(view)
 
         binding.switchCamera.setOnClickListener {
-            cameraSelector = if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA)
-                CameraSelector.DEFAULT_FRONT_CAMERA
-            else
-                CameraSelector.DEFAULT_BACK_CAMERA
+            cameraSelector =
+                if (cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA) CameraSelector.DEFAULT_FRONT_CAMERA
+                else CameraSelector.DEFAULT_BACK_CAMERA
             startCamera()
         }
-
         binding.captureImage.setOnClickListener { takePhoto() }
     }
 
@@ -59,9 +50,11 @@ class CameraFragment : Fragment() {
         startCamera()
     }
 
-    override fun onPause() {
-        super.onPause()
-        stopCamera()
+    override fun onStop() {
+        super.onStop()
+        // Ensure camera resources are released
+        cameraProvider.unbindAll()
+        orientationEventListener.disable()
     }
 
     private fun startCamera() {
@@ -69,45 +62,44 @@ class CameraFragment : Fragment() {
 
         cameraProviderFuture.addListener({
             cameraProvider = cameraProviderFuture.get()
-            bindCameraUseCases()
-        }, ContextCompat.getMainExecutor(requireContext()))
-    }
+            val preview = Preview.Builder()
+                .build()
+                .also {
+                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+                }
 
-    private fun bindCameraUseCases() {
-        val preview = Preview.Builder()
-            .build()
-            .also {
-                it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+            imageCapture = ImageCapture.Builder().build()
+
+            try {
+                cameraProvider.unbindAll()
+                cameraProvider.bindToLifecycle(
+                    viewLifecycleOwner,
+                    cameraSelector,
+                    preview,
+                    imageCapture
+                )
+
+            } catch (exc: Exception) {
+                Toast.makeText(
+                    requireContext(),
+                    "Failed to load camera",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Log.e(TAG, "startCamera: ${exc.message}")
             }
-
-        imageCapture = ImageCapture.Builder().build()
-
-        try {
-            cameraProvider?.unbindAll()
-            cameraProvider?.bindToLifecycle(
-                viewLifecycleOwner,
-                cameraSelector,
-                preview,
-                imageCapture
-            )
-        } catch (exc: Exception) {
-            Toast.makeText(
-                requireContext(),
-                "Failed to load camera",
-                Toast.LENGTH_SHORT
-            ).show()
-            Log.e(TAG, "startCamera: ${exc.message}")
-        }
-    }
-
-    private fun stopCamera() {
-        cameraProvider?.unbindAll()
+        }, ContextCompat.getMainExecutor(requireContext()))
     }
 
     private fun takePhoto() {
         val imageCapture = imageCapture ?: return
 
-        val photoFile = createCustomTempFile(requireContext().applicationContext)
+        val photoFile: File = try {
+            createCustomTempFile(requireContext())
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to create temporary file: ${e.message}")
+            Toast.makeText(requireContext(), "Failed to create file", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
 
@@ -116,11 +108,9 @@ class CameraFragment : Fragment() {
             ContextCompat.getMainExecutor(requireContext()),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val intent = Intent().apply {
-                        putExtra(EXTRA_CAMERA_IMAGE, output.savedUri.toString())
-                    }
-                    requireActivity().setResult(CAMERAX_RESULT, intent)
-                    requireActivity().finish()
+                    val imageUri = output.savedUri ?: Uri.fromFile(photoFile)
+                    findNavController().previousBackStackEntry?.savedStateHandle?.set("imageUri", imageUri.toString())
+                    findNavController().popBackStack()
                 }
 
                 override fun onError(exc: ImageCaptureException) {
@@ -151,12 +141,17 @@ class CameraFragment : Fragment() {
     private val orientationEventListener by lazy {
         object : OrientationEventListener(requireContext()) {
             override fun onOrientationChanged(orientation: Int) {
+                if (orientation == ORIENTATION_UNKNOWN) {
+                    return
+                }
+
                 val rotation = when (orientation) {
-                    in 45..134 -> Surface.ROTATION_270
-                    in 135..224 -> Surface.ROTATION_180
-                    in 225..314 -> Surface.ROTATION_90
+                    in 45 until 135 -> Surface.ROTATION_270
+                    in 135 until 225 -> Surface.ROTATION_180
+                    in 225 until 315 -> Surface.ROTATION_90
                     else -> Surface.ROTATION_0
                 }
+
                 imageCapture?.targetRotation = rotation
             }
         }
@@ -167,11 +162,6 @@ class CameraFragment : Fragment() {
         orientationEventListener.enable()
     }
 
-    override fun onStop() {
-        super.onStop()
-        orientationEventListener.disable()
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -179,9 +169,5 @@ class CameraFragment : Fragment() {
 
     companion object {
         private const val TAG = "CameraFragment"
-        const val EXTRA_CAMERA_IMAGE = "Camera Image"
-        const val CAMERAX_RESULT = 200
     }
 }
-
-

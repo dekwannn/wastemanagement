@@ -43,4 +43,19 @@
     <string name="percentage">50%</string>
     <string name="recommendation">Recommendation</string>
     <string name="date">Date</string>
+    <string name="error_camera_x">camera failed to initialize</string>
+    <string name="image_saved">image saved\n</string>
+
+    <string-array name="classes">
+        <item>Battery</item>
+        <item>Benign keratosis</item>
+        <item>Chickenpox</item>
+        <item>Dermatofibroma</item>
+        <item>Distal Subungual Onychomycosis</item>
+        <item>Measles</item>
+        <item>Melanocytic nevus</item>
+        <item>Melanoma</item>
+        <item>Monkeypox</item>
+        <item>Vascular lesion</item>
+    </string-array>
 </resources>

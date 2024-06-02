@@ -88,7 +88,15 @@
         android:id="@+id/cameraFragment"
         android:name="com.widi.scan.ui.camera.CameraFragment"
         android:label="fragment_camera"
-        tools:layout="@layout/fragment_camera" />
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_cameraFragment_to_scanFragment"
+            app:destination="@id/scanFragment">
+            <argument
+                android:name="imageUri"
+                app:argType="string" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/scanFragment"
         android:name="com.widi.scan.ui.scan.ScanFragment"

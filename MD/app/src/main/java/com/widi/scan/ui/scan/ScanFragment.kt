@@ -1,6 +1,7 @@
 package com.widi.scan.ui.scan
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -9,7 +10,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -19,8 +19,6 @@ import com.widi.scan.data.ScanRepository
 import com.widi.scan.data.local.HistoryEntity
 import com.widi.scan.databinding.BottomSheetDialogBinding
 import com.widi.scan.databinding.FragmentScanBinding
-import com.widi.scan.ui.camera.CameraFragment
-import com.widi.scan.ui.camera.CameraFragment.Companion.CAMERAX_RESULT
 import com.widi.scan.ui.database.HistoryDatabase
 import com.widi.scan.ui.history.HistoryViewModel
 import com.widi.scan.ui.history.HistoryViewModelFactory
@@ -62,7 +60,7 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
         val dao = HistoryDatabase.getDatabase(requireContext()).historyDao()
         val repository = ScanRepository(dao)
         val factory = HistoryViewModelFactory(repository)
-        historyViewModel = ViewModelProvider(this, factory).get(HistoryViewModel::class.java)
+        historyViewModel = ViewModelProvider(this, factory)[HistoryViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -83,6 +81,13 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
             btnBack.setOnClickListener {
                 findNavController().safeNavigate(ScanFragmentDirections.actionScanFragmentToHomeFragment())
             }
+        }
+
+        findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>("imageUri")?.observe(
+            viewLifecycleOwner
+        ) { imageUri ->
+            currentImageUri = Uri.parse(imageUri)
+            showImage()
         }
     }
 
@@ -107,21 +112,7 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
     }
 
     private fun startCamera() {
-        launcherIntentCamera
-        findNavController().safeNavigate(
-            ScanFragmentDirections.actionScanFragmentToCameraFragment())
-    }
-
-    private val launcherIntentCamera = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == CAMERAX_RESULT) {
-            val data = result.data
-            if (data != null) {
-                currentImageUri = data.getStringExtra(CameraFragment.EXTRA_CAMERA_IMAGE)?.toUri()
-                showImage()
-            }
-        }
+        findNavController().safeNavigate(ScanFragmentDirections.actionScanFragmentToCameraFragment())
     }
 
     private fun classifyImage() {
@@ -137,10 +128,10 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
             val maxConfidence = result.getOrNull(maxIndex)?.times(100)?.toInt() ?: 0
             val timestamp = System.currentTimeMillis()
 
-            // Save to database
+
             saveClassificationToDatabase(uri.toString(), maxLabel, timestamp, maxConfidence)
 
-            // Show result in bottom sheet dialog
+
             showBottomSheetDialog(result)
         }
     }
@@ -156,6 +147,7 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
         historyViewModel.insert(history)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showBottomSheetDialog(result: FloatArray) {
         val binding = BottomSheetDialogBinding.inflate(layoutInflater)
         val dialog = BottomSheetDialog(requireContext())
@@ -188,9 +180,5 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    companion object {
-        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
     }
 }
