@@ -19,7 +19,7 @@ import com.widi.scan.data.ScanRepository
 import com.widi.scan.data.local.HistoryEntity
 import com.widi.scan.databinding.BottomSheetDialogBinding
 import com.widi.scan.databinding.FragmentScanBinding
-import com.widi.scan.ui.database.HistoryDatabase
+import com.widi.scan.data.local.HistoryDatabase
 import com.widi.scan.ui.history.HistoryViewModel
 import com.widi.scan.ui.history.HistoryViewModelFactory
 import com.widi.scan.ui.utils.safeNavigate
@@ -122,16 +122,13 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
             val preprocessedImage = wasteModel.preprocessImage(bitmap)
             val result = wasteModel.classify(preprocessedImage)
 
-            val labels = listOf("BATTERY", "BIOLOGICAL", "CLOTHES", "CARDBOARD", "GLASS", "METAL", "PAPER", "PLASTIC", "NON_RECYCLE", "SHOES")
+            val labels = resources.getStringArray(R.array.waste_labels)
             val maxIndex = result.indices.maxByOrNull { result[it] } ?: -1
-            val maxLabel = labels.getOrNull(maxIndex) ?: "Unknown"
+            val maxLabel = labels.getOrNull(maxIndex) ?: getString(R.string.no_data)
             val maxConfidence = result.getOrNull(maxIndex)?.times(100)?.toInt() ?: 0
             val timestamp = System.currentTimeMillis()
 
-
             saveClassificationToDatabase(uri.toString(), maxLabel, timestamp, maxConfidence)
-
-
             showBottomSheetDialog(result)
         }
     }
@@ -153,14 +150,15 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
         val dialog = BottomSheetDialog(requireContext())
         dialog.setContentView(binding.root)
 
-        val labels = listOf("BATTERY", "BIOLOGICAL", "CLOTHES", "CARDBOARD", "GLASS", "METAL", "PAPER", "PLASTIC", "NON_RECYCLE", "SHOES")
+        val labels = resources.getStringArray(R.array.waste_labels)
+        val descriptions = resources.getStringArray(R.array.waste_descriptions)
         val maxIndex = result.indices.maxByOrNull { result[it] } ?: -1
-        val maxLabel = labels.getOrNull(maxIndex) ?: "Unknown"
+        val maxLabel = labels.getOrNull(maxIndex) ?: getString(R.string.no_data)
         val maxConfidence = result.getOrNull(maxIndex)?.times(100)?.toInt() ?: 0
 
         binding.resultPercentage.text = "$maxConfidence%"
         binding.resultRecycle.text = maxLabel
-        binding.textDescription.text = "Description of $maxLabel"
+        binding.textDescription.text = descriptions.getOrNull(maxIndex) ?: getString(R.string.lorem_ipsum)
 
         binding.btnRecommendation.setOnClickListener {
             findNavController().safeNavigate(ScanFragmentDirections.actionScanFragmentToMapsFragment())

@@ -53,7 +53,9 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
     override fun onStop() {
         super.onStop()
         // Ensure camera resources are released
-        cameraProvider.unbindAll()
+        if (::cameraProvider.isInitialized) {
+            cameraProvider.unbindAll()
+        }
         orientationEventListener.disable()
     }
 
@@ -78,25 +80,28 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
                     preview,
                     imageCapture
                 )
-
+                Log.d(TAG, "Camera started successfully.")
             } catch (exc: Exception) {
                 Toast.makeText(
                     requireContext(),
                     "Failed to load camera",
                     Toast.LENGTH_SHORT
                 ).show()
-                Log.e(TAG, "startCamera: ${exc.message}")
+                Log.e(TAG, "startCamera: ${exc.message}", exc)
             }
         }, ContextCompat.getMainExecutor(requireContext()))
     }
 
     private fun takePhoto() {
-        val imageCapture = imageCapture ?: return
+        val imageCapture = imageCapture ?: run {
+            Log.e(TAG, "ImageCapture is null.")
+            return
+        }
 
         val photoFile: File = try {
             createCustomTempFile(requireContext())
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to create temporary file: ${e.message}")
+            Log.e(TAG, "Failed to create temporary file: ${e.message}", e)
             Toast.makeText(requireContext(), "Failed to create file", Toast.LENGTH_SHORT).show()
             return
         }
@@ -108,7 +113,9 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
             ContextCompat.getMainExecutor(requireContext()),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
+                    Log.d(TAG, "Photo saved successfully.")
                     val imageUri = output.savedUri ?: Uri.fromFile(photoFile)
+                    Log.d(TAG, "Image saved at: $imageUri")
                     findNavController().previousBackStackEntry?.savedStateHandle?.set("imageUri", imageUri.toString())
                     findNavController().popBackStack()
                 }
@@ -119,7 +126,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
                         "Failed to take photo.",
                         Toast.LENGTH_SHORT
                     ).show()
-                    Log.e(TAG, "onError: ${exc.message}")
+                    Log.e(TAG, "onError: ${exc.message}", exc)
                 }
             }
         )
@@ -153,6 +160,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
                 }
 
                 imageCapture?.targetRotation = rotation
+                Log.d(TAG, "Orientation changed to: $rotation")
             }
         }
     }

@@ -59,19 +59,20 @@
         android:fontFamily="@font/poppins_regular"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints="username" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/round_back_dark_blue5_15">
 
-        <EditText
+        <com.widi.scan.custom.CustomEmailEditText
             android:id="@+id/ed_register_email"
             android:layout_width="match_parent"
             android:layout_height="55dp"
@@ -90,8 +91,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/round_back_dark_blue5_15">
 
@@ -114,7 +115,6 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:padding="10dp"
-            android:src="@drawable/baseline_remove_red_eye_24"
             android:adjustViewBounds="true"
             android:layout_marginEnd="20dp"
             android:contentDescription="@string/app_name" />
@@ -125,8 +125,8 @@
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginStart="40dp"
         android:text="@string/register"
         android:textSize="16sp"
         android:textColor="@color/white"
