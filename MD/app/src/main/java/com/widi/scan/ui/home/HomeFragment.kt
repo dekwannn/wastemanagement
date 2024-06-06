@@ -1,6 +1,5 @@
 package com.widi.scan.ui.home
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,9 +9,6 @@ import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 import com.widi.scan.R
 import com.widi.scan.databinding.FragmentHomeBinding
 import com.widi.scan.ui.utils.safeNavigate
@@ -20,15 +16,8 @@ import com.widi.scan.ui.utils.safeNavigate
 
 class HomeFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
-
-    private val viewModel: HomeViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding
-    private lateinit var auth: FirebaseAuth
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,8 +28,6 @@ class HomeFragment : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        auth = Firebase.auth
 
         val fadeIn = AnimationUtils.loadAnimation(requireContext(), R.anim.fade_in)
 
@@ -69,11 +56,6 @@ class HomeFragment : Fragment() {
                     requireActivity().finish()
                 }
             })
-    }
-
-    private fun logout() {
-        auth.signOut()
-        findNavController().safeNavigate(HomeFragmentDirections.actionHomeFragmentToLoginFragment())
     }
 
 }

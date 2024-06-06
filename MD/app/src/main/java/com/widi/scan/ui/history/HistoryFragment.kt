@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.widi.scan.data.ScanRepository
 import com.widi.scan.databinding.FragmentHistoryBinding
 import com.widi.scan.ui.adapter.HistoryAdapter
-import com.widi.scan.ui.database.HistoryDatabase
+import com.widi.scan.data.local.HistoryDatabase
 
 class HistoryFragment : Fragment() {
 
@@ -22,7 +21,7 @@ class HistoryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -35,13 +34,21 @@ class HistoryFragment : Fragment() {
         val factory = HistoryViewModelFactory(repository)
         historyViewModel = ViewModelProvider(this, factory)[HistoryViewModel::class.java]
 
-        val adapter = HistoryAdapter()
+        val adapter = HistoryAdapter ()
+
         binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
         binding.rvHistory.adapter = adapter
 
-        historyViewModel.allHistory.observe(viewLifecycleOwner, Observer { history ->
-            history?.let { adapter.submitList(it) }
-        })
+        historyViewModel.allHistory.observe(viewLifecycleOwner) { history ->
+            if (history.isNullOrEmpty()) {
+                binding.noHistory.visibility = View.VISIBLE
+                binding.rvHistory.visibility = View.GONE
+            } else {
+                binding.noHistory.visibility = View.GONE
+                binding.rvHistory.visibility = View.VISIBLE
+                adapter.submitList(history)
+            }
+        }
 
         historyViewModel.getAllHistory()
     }

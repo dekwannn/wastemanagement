@@ -21,6 +21,7 @@ class HistoryViewModel(private val repository: ScanRepository) : ViewModel() {
             _allHistory.value = repository.getAllHistory()
         }
     }
+
 }
 
 class HistoryViewModelFactory(private val repository: ScanRepository) : ViewModelProvider.Factory {

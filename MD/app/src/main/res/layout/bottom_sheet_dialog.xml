@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_round_remove"
         android:layout_gravity="center|top"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/app_name" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/baseline_clear_24"
-            android:layout_marginStart="250dp"
+            android:layout_marginStart="235dp"
             android:layout_marginTop="15dp"
             android:id="@+id/cancelButton"
             android:contentDescription="@string/result" />
@@ -115,13 +116,32 @@
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/tvRecommendation"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/recommendation"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/recommendation_text"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp"/>
         </LinearLayout>
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_marginVertical="16dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
         android:id="@+id/btnRecommendation"
         android:layout_width="match_parent"
         android:layout_height="50dp"

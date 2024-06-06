@@ -41,11 +41,12 @@
         <ImageView
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="10dp"
             android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/profile"
-            android:contentDescription="@string/app_name" />
+            android:contentDescription="@string/app_name"
+            tools:ignore="ImageContrastCheck" />
     </RelativeLayout>
 
     <ScrollView
@@ -73,13 +74,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="85dp"
                     android:contentDescription="@string/app_name"
+                    android:src="@drawable/recycling10"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.0"
-                    android:src="@drawable/recycling10" />
+                    tools:ignore="ImageContrastCheck" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -88,7 +90,7 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="Have a waste\nissue?"
+                    android:text="@string/have_a_waste_nissue"
                     android:textSize="21sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -107,7 +109,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView4"
-                    app:layout_constraintVertical_bias="0.515" />
+                    app:layout_constraintVertical_bias="0.515"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -207,9 +210,9 @@
                             android:id="@+id/btnArticles"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/farticle"
                             android:contentDescription="@string/articles"
-                            tools:ignore="MissingConstraints" />
+                            android:src="@drawable/farticle"
+                            tools:ignore="MissingConstraints,ImageContrastCheck" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -239,9 +242,9 @@
                             android:id="@+id/btnHistory"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/fhistory"
                             android:contentDescription="@string/history"
-                            tools:ignore="MissingConstraints" />
+                            android:src="@drawable/fhistory"
+                            tools:ignore="MissingConstraints,ImageContrastCheck" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
