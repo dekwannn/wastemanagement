@@ -1,7 +1,6 @@
 package com.widi.scan.data.local
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
@@ -12,4 +11,7 @@ interface HistoryDao {
 
     @Query("SELECT * FROM history ORDER BY timestamp DESC")
     suspend fun getAllHistory(): List<HistoryEntity>
+
+    @Query("SELECT * FROM history WHERE timestamp = :timestamp LIMIT 1")
+    suspend fun getHistoryByTimestamp(timestamp: Long): HistoryEntity?
 }

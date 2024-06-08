@@ -6,22 +6,20 @@ import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.FragmentManager.TAG
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.widi.scan.R
-import com.widi.scan.data.ScanRepository
-import com.widi.scan.data.local.HistoryEntity
 import com.widi.scan.databinding.BottomSheetDialogBinding
 import com.widi.scan.databinding.FragmentScanBinding
-import com.widi.scan.data.local.HistoryDatabase
-import com.widi.scan.ui.history.HistoryViewModel
-import com.widi.scan.ui.history.HistoryViewModelFactory
 import com.widi.scan.ui.utils.safeNavigate
 import java.io.InputStream
 
@@ -31,7 +29,6 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
     private val binding get() = _binding!!
     private var currentImageUri: Uri? = null
     private lateinit var wasteModel: WasteClassification
-    private lateinit var historyViewModel: HistoryViewModel
 
     private fun allPermissionsGranted() =
         ContextCompat.checkSelfPermission(
@@ -56,11 +53,6 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
         wasteModel = WasteClassification(requireContext())
-
-        val dao = HistoryDatabase.getDatabase(requireContext()).historyDao()
-        val repository = ScanRepository(dao)
-        val factory = HistoryViewModelFactory(repository)
-        historyViewModel = ViewModelProvider(this, factory)[HistoryViewModel::class.java]
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -133,16 +125,32 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
         }
     }
 
+    @SuppressLint("RestrictedApi")
     private fun saveClassificationToDatabase(imageUri: String, label: String, timestamp: Long, confidence: Int) {
-        val history = HistoryEntity(
-            imageUri = imageUri,
-            label = label,
-            timestamp = timestamp,
-            confidence = confidence
-        )
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            val historyData = hashMapOf(
+                "userId" to user.uid,
+                "imageUri" to imageUri,
+                "label" to label,
+                "timestamp" to timestamp,
+                "confidence" to confidence
+            )
 
-        historyViewModel.insert(history)
+            val firestore = FirebaseFirestore.getInstance()
+            firestore.collection("histories")
+                .add(historyData)
+                .addOnSuccessListener { documentReference ->
+                    Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+                }
+                .addOnFailureListener { e ->
+                    Log.w(TAG, "Error adding document", e)
+                }
+        } else {
+            Log.e(TAG, "User is not authenticated")
+        }
     }
+
 
     @SuppressLint("SetTextI18n")
     private fun showBottomSheetDialog(result: FloatArray) {

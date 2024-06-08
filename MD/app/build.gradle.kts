@@ -85,8 +85,8 @@ dependencies {
     implementation(libs.androidx.activity.ktx)
 
     //retrofit
-    implementation (libs.retrofit)
-    implementation (libs.converter.gson)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
 
     //camera

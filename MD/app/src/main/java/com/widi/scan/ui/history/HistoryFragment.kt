@@ -5,18 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.widi.scan.data.ScanRepository
 import com.widi.scan.databinding.FragmentHistoryBinding
 import com.widi.scan.ui.adapter.HistoryAdapter
-import com.widi.scan.data.local.HistoryDatabase
+import com.widi.scan.ui.main.ViewModelFactory
 
 class HistoryFragment : Fragment() {
 
     private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding!!
-    private lateinit var historyViewModel: HistoryViewModel
+    private val viewModelFactory: ViewModelProvider.Factory by lazy {
+        ViewModelFactory(ScanRepository())
+    }
+    private val historyViewModel: HistoryViewModel by viewModels { viewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,13 +33,8 @@ class HistoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dao = HistoryDatabase.getDatabase(requireContext()).historyDao()
-        val repository = ScanRepository(dao)
-        val factory = HistoryViewModelFactory(repository)
-        historyViewModel = ViewModelProvider(this, factory)[HistoryViewModel::class.java]
 
-        val adapter = HistoryAdapter ()
-
+        val adapter = HistoryAdapter()
         binding.rvHistory.layoutManager = LinearLayoutManager(requireContext())
         binding.rvHistory.adapter = adapter
 
@@ -50,11 +49,17 @@ class HistoryFragment : Fragment() {
             }
         }
 
-        historyViewModel.getAllHistory()
+        binding.btnDelete.setOnClickListener{
+            historyViewModel.deleteAllHistory()
+        }
+        historyViewModel.loadAllHistory()
+
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
 }
+

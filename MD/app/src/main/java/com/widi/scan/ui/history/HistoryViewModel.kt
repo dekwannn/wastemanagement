@@ -10,26 +10,19 @@ class HistoryViewModel(private val repository: ScanRepository) : ViewModel() {
     private val _allHistory = MutableLiveData<List<HistoryEntity>>()
     val allHistory: LiveData<List<HistoryEntity>> get() = _allHistory
 
-    fun insert(history: HistoryEntity) {
+    fun loadAllHistory() {
         viewModelScope.launch {
-            repository.insert(history)
+            val history = repository.getAllHistory()
+            _allHistory.value = history.distinctBy { it.timestamp }
         }
     }
 
-    fun getAllHistory() {
+    fun deleteAllHistory() {
         viewModelScope.launch {
-            _allHistory.value = repository.getAllHistory()
+            repository.deleteAllHistory()
+            loadAllHistory()
         }
     }
 
 }
 
-class HistoryViewModelFactory(private val repository: ScanRepository) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(HistoryViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return HistoryViewModel(repository) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
-    }
-}
