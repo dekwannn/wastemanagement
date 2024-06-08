@@ -40,18 +40,24 @@ class HistoryFragment : Fragment() {
 
         historyViewModel.allHistory.observe(viewLifecycleOwner) { history ->
             if (history.isNullOrEmpty()) {
-                binding.noHistory.visibility = View.VISIBLE
-                binding.rvHistory.visibility = View.GONE
+                binding.apply {
+                    btnDelete.visibility = View.GONE
+                    noHistory.visibility = View.VISIBLE
+                    rvHistory.visibility = View.GONE
+                }
             } else {
-                binding.noHistory.visibility = View.GONE
-                binding.rvHistory.visibility = View.VISIBLE
-                adapter.submitList(history)
+                binding.apply {
+                    noHistory.visibility = View.GONE
+                    rvHistory.visibility = View.VISIBLE
+                    adapter.submitList(history)
+                    btnDelete.setOnClickListener{
+                        historyViewModel.deleteAllHistory()
+                    }
+                }
             }
         }
 
-        binding.btnDelete.setOnClickListener{
-            historyViewModel.deleteAllHistory()
-        }
+
         historyViewModel.loadAllHistory()
 
     }
