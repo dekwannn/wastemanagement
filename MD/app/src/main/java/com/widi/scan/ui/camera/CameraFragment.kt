@@ -64,7 +64,6 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
 
     override fun onStop() {
         super.onStop()
-        // Ensure camera resources are released
         if (::cameraProvider.isInitialized) {
             cameraProvider.unbindAll()
         }
@@ -92,28 +91,24 @@ class CameraFragment : Fragment(R.layout.fragment_camera) {
                     preview,
                     imageCapture
                 )
-                Log.d(TAG, "Camera started successfully.")
             } catch (exc: Exception) {
                 Toast.makeText(
                     requireContext(),
                     "Failed to load camera",
                     Toast.LENGTH_SHORT
                 ).show()
-                Log.e(TAG, "startCamera: ${exc.message}", exc)
             }
         }, ContextCompat.getMainExecutor(requireContext()))
     }
 
     private fun takePhoto() {
         val imageCapture = imageCapture ?: run {
-            Log.e(TAG, "ImageCapture is null.")
             return
         }
 
         val photoFile: File = try {
             createCustomTempFile(requireContext())
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to create temporary file: ${e.message}", e)
             Toast.makeText(requireContext(), "Failed to create file", Toast.LENGTH_SHORT).show()
             return
         }
