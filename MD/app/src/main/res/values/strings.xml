@@ -51,6 +51,7 @@
     <string name="no_data">No data</string>
     <string name="recommendation_text">Click the BUTTON to find out the location of the nearest waste collector</string>
     <string name="clear_history">Clear all</string>
+    <string name="history_empty">Please scan your waste first!</string>
 
     <string-array name="waste_labels">
         <item>Battery</item>

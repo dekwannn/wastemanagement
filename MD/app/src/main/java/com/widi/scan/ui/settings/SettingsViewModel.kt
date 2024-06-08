@@ -1,6 +1,5 @@
 package com.widi.scan.ui.settings
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.widi.scan.data.ScanRepository
