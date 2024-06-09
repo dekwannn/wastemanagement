@@ -17,7 +17,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
             android:id="@+id/tvResult"
@@ -52,14 +53,14 @@
 
         <TextView
             android:id="@+id/resultPercentage"
-            android:layout_width="90dp"
+            android:layout_width="101dp"
             android:layout_height="70dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/percentage"
-            android:textSize="24sp"
+            android:background="@drawable/background_shape"
             android:fontFamily="@font/poppins_bold"
+            android:text="@string/percentage"
             android:textAlignment="center"
-            android:background="@drawable/background_shape" />
+            android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="0dp"

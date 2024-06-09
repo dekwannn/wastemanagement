@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/scanFragment">
 
     <LinearLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ui.add.AddStoryActivity"
         android:orientation="vertical"
         android:paddingTop="20dp"
         android:paddingHorizontal="0dp"
@@ -43,9 +43,6 @@
                 android:textSize="21sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/buttonResult" />
-
-
-
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.cardview.widget.CardView
@@ -55,25 +52,32 @@
             android:layout_marginEnd="30dp"
             android:layout_marginTop="10dp"
             app:cardCornerRadius="40dp"
-            android:backgroundTint="@color/white"
-            >
+            android:backgroundTint="@color/white">
             <ImageView
                 android:id="@+id/imagePreview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:src="@drawable/empty_image"
-                android:contentDescription="@string/app_name"
-                />
+                android:contentDescription="@string/app_name" />
+
+            <ImageView
+                android:id="@+id/scanLine"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:src="@drawable/scan_line"
+                android:layout_gravity="top"
+                android:contentDescription="@string/app_name" />
         </androidx.cardview.widget.CardView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
-            >
+            android:gravity="center_horizontal">
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_gallery"
                 android:layout_width="160dp"
@@ -85,7 +89,8 @@
                 android:textColor="@color/white" />
             <Space
                 android:layout_width="20dp"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_camera"
                 android:layout_width="160dp"
@@ -94,13 +99,13 @@
                 android:backgroundTint="@color/primary"
                 android:textColor="@color/white"
                 android:fontFamily="@font/poppins_bold"
-                android:background="@drawable/round_back_primary_15" />
+                android:background="@drawable/round_back_primary_15"/>
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:layout_marginVertical="16dp"
-            android:layout_marginStart="35dp"
-            android:layout_marginEnd="35dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
             android:id="@+id/buttonResult"
             android:layout_width="match_parent"
             android:layout_height="50dp"
@@ -115,6 +120,4 @@
             android:layout_width="match_parent"
             android:layout_height="200dp" />
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

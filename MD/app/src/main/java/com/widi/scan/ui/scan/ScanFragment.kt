@@ -1,11 +1,14 @@
 package com.widi.scan.ui.scan
 
 import android.Manifest
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -59,6 +62,11 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentScanBinding.bind(view)
 
+        val scanAnimator = ObjectAnimator.ofFloat(binding.scanLine, "translationY", 0f, 480f)
+        scanAnimator.duration = 1500
+        scanAnimator.repeatCount = ObjectAnimator.INFINITE
+        scanAnimator.repeatMode = ObjectAnimator.REVERSE
+
         binding.apply {
             buttonGallery.setOnClickListener { startGallery() }
             buttonCamera.setOnClickListener { startCamera() }
@@ -67,7 +75,12 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
                     showToast(getString(R.string.empty_image_warning))
                     return@setOnClickListener
                 }
-                classifyImage()
+                scanAnimator.start()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    scanAnimator.cancel()
+                    classifyImage()
+                }, 3000)
+
             }
 
             btnBack.setOnClickListener {

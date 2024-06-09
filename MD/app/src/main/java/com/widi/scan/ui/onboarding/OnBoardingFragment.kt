@@ -36,10 +36,10 @@ class OnBoardingFragment : Fragment() {
         onBoardingData.add(OnBoarding("Welcome to SCAN", "Find and identify types of waste easily and accurately through image scanning",
             R.drawable.onboarding1
         ))
-        onBoardingData.add(OnBoarding("Scan Your Waste", "Find and identify types of waste easily and accurately through image scanning",
+        onBoardingData.add(OnBoarding("Scan Your Waste", "Take photos of your trash to get recycling information and recommendations.",
             R.drawable.onboarding2
         ))
-        onBoardingData.add(OnBoarding("Get Recommendation", "Find and identify types of waste easily and accurately through image scanning",
+        onBoardingData.add(OnBoarding("Get Recommendation", "Use the map to find the nearest waste collection points and recycling facilities near you.",
             R.drawable.onboarding3
         ))
 
