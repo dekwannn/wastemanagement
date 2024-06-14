@@ -12,6 +12,7 @@ import com.widi.scan.R
 import com.widi.scan.data.pref.UserPreference
 import com.widi.scan.databinding.FragmentOnBoardingBinding
 import com.widi.scan.model.OnBoarding
+import com.widi.scan.ui.utils.safeNavigate
 
 class OnBoardingFragment : Fragment() {
 
@@ -77,14 +78,20 @@ class OnBoardingFragment : Fragment() {
             }
         })
 
-        binding.btnLogin.setOnClickListener {
-            userPreferences.setOnboardingComplete(true)
-            findNavController().navigate(R.id.action_onBoardingFragment_to_loginFragment)
+        binding.apply {
+            btnLogin.setOnClickListener {
+                userPreferences.setOnboardingComplete(true)
+                findNavController().safeNavigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToLoginFragment())
+            }
+            btnRegister.setOnClickListener {
+                userPreferences.setOnboardingComplete(true)
+                findNavController().safeNavigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToSignUpFragment())
+            }
+
         }
 
-        binding.btnRegister.setOnClickListener {
-            userPreferences.setOnboardingComplete(true)
-            findNavController().navigate(R.id.action_onBoardingFragment_to_signUpFragment)
-        }
+
+
+
     }
 }
