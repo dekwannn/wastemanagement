@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Scan</string>
+    <string name="login">Masuk</string>
+    <string name="login_text">Silakan masuk ke akun Anda</string>
+    <string name="email">Email</string>
+    <string name="password">Kata Sandi</string>
+    <string name="signup_text">Belum punya akun?</string>
+    <string name="logout">Keluar</string>
+    <string name="already_have_an_account">Sudah punya akun</string>
+    <string name="let_s_started">Mari Mulai</string>
+    <string name="sign_up">Daftar</string>
+    <string name="already_have_an_account_sign_in">Sudah punya akun?</string>
+    <string name="name">Nama</string>
+    <string name="register">Daftar</string>
+    <string name="copyright_2024">Hak Cipta © 2024</string>
+    <string name="title">Judul</string>
+    <string name="description">Deskripsi</string>
+    <string name="please_wait">Harap Tunggu…</string>
+    <string name="log_in_with_google">Masuk dengan Google</string>
+    <string name="or">ATAU</string>
+    <string name="your_web_client_id">597489190587-1gfmgo447bfq16mr3ss5nvjavradr1jl.apps.googleusercontent.com</string>
+    <string name="hello">Halo,</string>
+    <string name="username">Nama Pengguna</string>
+    <string name="featured">Unggulan</string>
+    <string name="camera">Kamera</string>
+    <string name="image">Gambar</string>
+    <string name="articles">Artikel</string>
+    <string name="history">Riwayat</string>
+    <string name="see_all">Lihat semua</string>
+    <string name="result">Hasil</string>
+    <string name="failed_to_pick_image">Gagal memilih gambar\n</string>
+    <string name="empty_image_warning">Harap pilih gambar terlebih dahulu</string>
+    <string name="categories">Kategori</string>
+    <string name="home">Beranda</string>
+    <string name="settings">Pengaturan</string>
+    <string name="hello_blank_fragment">Halo fragmen kosong</string>
+    <string name="personalization">Personalisasi</string>
+    <string name="dark_mode">Mode Gelap</string>
+    <string name="language">Bahasa</string>
+    <string name="recycle">Daur Ulang</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua......</string>
+    <string name="percentage">50%</string>
+    <string name="recommendation">Rekomendasi</string>
+    <string name="date">Tanggal</string>
+    <string name="error_camera_x">kamera gagal diinisialisasi</string>
+    <string name="image_saved">gambar tersimpan\n</string>
+    <string name="have_a_waste_nissue">Punya masalah\nsampah?</string>
+    <string name="minimum_characters">Kata sandi harus minimal 8 karakter</string>
+    <string name="about">Tentang</string>
+    <string name="no_data">Tidak ada data</string>
+    <string name="recommendation_text">Klik TOMBOL untuk mengetahui lokasi pengumpul sampah terdekat</string>
+    <string name="clear_history">Hapus semua</string>
+    <string name="history_empty">Harap scan limbah Anda terlebih dahulu!</string>
+    <string name="welcome">Selamat Datang</string>
+    <string name="upload_image">Unggah Gambar</string>
+    <string name="author">Penulis</string>
+    <string name="location">Lokasi</string>
+    <string name="detection">Deteksi</string>
+    <string name="select_language">Pilih Bahasa</string>
+
+    <string-array name="waste_labels">
+        <item>Baterai</item>
+        <item>Kardus</item>
+        <item>Pakaian</item>
+        <item>Kaca</item>
+        <item>Logam</item>
+        <item>Non-Daur Ulang</item>
+        <item>Kertas</item>
+        <item>Plastik</item>
+        <item>Sepatu</item>
+    </string-array>
+
+    <string-array name="waste_descriptions">
+        <item>Limbah baterai terdiri dari baterai bekas, termasuk baterai isi ulang dan sekali pakai. Baterai mengandung logam berat dan bahan kimia beracun, seperti timbal, merkuri, kadmium, dan litium, yang dapat berbahaya bagi kesehatan manusia dan lingkungan jika tidak dibuang dengan benar. Ketika baterai tidak didaur ulang, mereka sering berakhir di tempat pembuangan sampah di mana bahan berbahaya ini dapat meresap ke dalam tanah dan air, mencemari ekosistem dan menimbulkan risiko bagi satwa liar dan manusia. Daur ulang baterai membantu memulihkan logam berharga dan mengurangi dampak lingkungan dari pembuangan baterai.</item>
+        <item>Limbah kardus termasuk kotak kardus bergelombang, bahan kemasan, dan produk kertas karton. Kardus banyak digunakan dalam industri pengiriman dan pengemasan, menghasilkan banyak limbah kardus. Daur ulang kardus menghemat sumber daya alam, mengurangi konsumsi energi, dan meminimalkan polusi yang terkait dengan produksi kardus. Daur ulang kardus juga membantu mengurangi ruang tempat pembuangan sampah dan emisi gas rumah kaca, berkontribusi pada keberlanjutan lingkungan dan pelestarian sumber daya.</item>
+        <item>Limbah pakaian terdiri dari pakaian dan tekstil yang tidak lagi diinginkan atau dibutuhkan. Industri mode menghasilkan sejumlah besar limbah tekstil akibat tren mode cepat dan konsumerisme. Daur ulang pakaian melalui donasi, penjualan kembali, atau program daur ulang tekstil dapat memperpanjang masa pakai pakaian dan mengurangi dampak lingkungan dari produksi dan pembuangan tekstil. Selain itu, mendonasikan pakaian ke badan amal dan toko barang bekas dapat bermanfaat bagi komunitas yang membutuhkan dan mendukung inisiatif mode berkelanjutan.</item>
+        <item>Limbah kaca terdiri dari wadah kaca, botol, dan bahan kemasan. Kaca dapat didaur ulang tanpa batas dan dapat didaur ulang menjadi produk kaca baru dengan kehilangan kualitas atau kemurnian yang minimal. Daur ulang kaca menghemat sumber daya alam, menghemat energi, dan mengurangi polusi yang terkait dengan produksi kaca. Selain itu, daur ulang kaca membantu mengalihkan limbah dari tempat pembuangan sampah dan mengurangi dampak lingkungan dari pembuangan kaca, menjadikannya pilihan kemasan yang ramah lingkungan.</item>
+        <item>Limbah logam mencakup logam besi dan non-besi seperti aluminium, baja, tembaga, dan kuningan. Logam adalah bahan yang sangat dapat didaur ulang yang dapat dilebur dan digunakan kembali dalam berbagai aplikasi industri. Daur ulang logam menghemat sumber daya alam, mengurangi konsumsi energi, dan meminimalkan emisi gas rumah kaca yang terkait dengan produksi logam dari bahan mentah. Selain itu, daur ulang logam membantu mencegah polusi logam dan mengurangi dampak lingkungan dari pembuangan logam.</item>
+        <item>Limbah yang tidak dapat didaur ulang mengacu pada bahan yang tidak dapat didaur ulang atau sulit untuk didaur ulang karena komposisi, ukuran, atau kontaminasinya. Limbah yang tidak dapat didaur ulang termasuk plastik tertentu, bahan campuran, limbah berbahaya, dan limbah elektronik. Pembuangan yang benar dari limbah yang tidak dapat didaur ulang sangat penting untuk mencegah kontaminasi lingkungan dan risiko kesehatan masyarakat. Tergantung pada jenis limbahnya, metode pembuangan dapat mencakup pembuangan di tempat pembuangan sampah, pembakaran, atau proses pengolahan khusus. Meminimalkan produksi limbah yang tidak dapat didaur ulang melalui pengurangan limbah, penggunaan kembali, dan desain produk yang berkelanjutan sangat penting untuk mencapai tujuan keberlanjutan lingkungan dan pelestarian sumber daya.</item>
+        <item>Limbah kertas mencakup berbagai produk kertas, termasuk surat kabar, majalah, kertas kantor, dan kemasan kardus. Daur ulang kertas adalah bagian penting dari upaya pengelolaan limbah dan pelestarian sumber daya. Daur ulang kertas membantu menyelamatkan pohon, menghemat air dan energi, serta mengurangi polusi yang terkait dengan produksi kertas. Selain itu, daur ulang kertas mengurangi ruang tempat pembuangan sampah dan emisi gas rumah kaca, menjadikannya pilihan yang ramah lingkungan untuk pembuangan kertas.</item>
+        <item>Limbah plastik mencakup berbagai polimer sintetis yang digunakan dalam kemasan, produk konsumen, dan aplikasi industri. Polusi plastik adalah masalah lingkungan yang signifikan, karena limbah plastik sering berakhir di lautan, sungai, dan tempat pembuangan sampah, di mana limbah tersebut bertahan selama ratusan tahun, menyebabkan kerusakan pada kehidupan laut, satwa liar, dan ekosistem. Daur ulang plastik membantu mengurangi polusi plastik, menghemat sumber daya alam, dan mengurangi konsumsi energi yang terkait dengan produksi plastik. Selain itu, daur ulang plastik mendorong model ekonomi sirkular, di mana plastik digunakan kembali, didaur ulang, atau dimanfaatkan kembali untuk meminimalkan dampak lingkungan dan mendukung pengelolaan sumber daya yang berkelanjutan.</item>
+        <item>Limbah sepatu terdiri dari alas kaki yang tidak diinginkan atau dibuang, termasuk sepatu, sepatu kets, dan sandal. Sepatu sering terbuat dari berbagai bahan, termasuk kulit, karet, plastik, dan tekstil, yang dapat sulit untuk didaur ulang karena komposisi kompleksnya. Daur ulang sepatu melalui donasi, penjualan kembali, atau program daur ulang khusus dapat memperpanjang masa pakainya dan mengurangi dampak lingkungan dari produksi dan pembuangan alas kaki. Selain itu, mendonasikan sepatu ke organisasi amal dapat bermanfaat bagi komunitas yang membutuhkan dan mendorong konsumsi berkelanjutan serta pengurangan limbah.</item>
+    </string-array>
+</resources>

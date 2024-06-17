@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
@@ -59,6 +60,8 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+        binding?.loginLayout?.startAnimation(fadeIn)
         auth = Firebase.auth
 
         binding?.apply {
@@ -82,8 +85,13 @@ class LoginFragment : Fragment() {
     }
 
     private fun firebaseEmailLogin(binding: FragmentLoginBinding?) {
-        val email = binding?.edLoginEmail?.text.toString()
-        val password = binding?.edLoginPassword?.text.toString()
+        val email = binding?.edLoginEmail?.text.toString().trim()
+        val password = binding?.edLoginPassword?.text.toString().trim()
+
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(context, "Please fill in both email and password", Toast.LENGTH_SHORT).show()
+            return
+        }
 
         binding?.progressBar?.visibility = View.VISIBLE
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
@@ -96,6 +104,7 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
 
     private fun firebaseGoogleLogin() {
         val signInIntent: Intent = mGoogleSignInClient.signInIntent

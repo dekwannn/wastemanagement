@@ -11,7 +11,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.widi.scan.R
 import com.widi.scan.data.pref.UserPreference
 import com.widi.scan.databinding.FragmentOnBoardingBinding
-import com.widi.scan.model.OnBoarding
+import com.widi.scan.data.model.OnBoarding
+import com.widi.scan.ui.utils.safeNavigate
 
 class OnBoardingFragment : Fragment() {
 
@@ -33,15 +34,21 @@ class OnBoardingFragment : Fragment() {
         userPreferences = UserPreference(requireContext())
 
         val onBoardingData: MutableList<OnBoarding> = ArrayList()
-        onBoardingData.add(OnBoarding("Welcome to SCAN", "Find and identify types of waste easily and accurately through image scanning",
+        onBoardingData.add(
+            OnBoarding("Welcome to SCAN", "Find and identify types of waste easily and accurately through image scanning",
             R.drawable.onboarding1
-        ))
-        onBoardingData.add(OnBoarding("Scan Your Waste", "Take photos of your trash to get recycling information and recommendations.",
+        )
+        )
+        onBoardingData.add(
+            OnBoarding("Scan Your Waste", "Take photos of your trash to get recycling information and recommendations.",
             R.drawable.onboarding2
-        ))
-        onBoardingData.add(OnBoarding("Get Recommendation", "Use the map to find the nearest waste collection points and recycling facilities near you.",
+        )
+        )
+        onBoardingData.add(
+            OnBoarding("Get Recommendation", "Use the map to find the nearest waste collection points and recycling facilities near you.",
             R.drawable.onboarding3
-        ))
+        )
+        )
 
         onBoardingViewPagerAdapter = OnBoardingViewPagerAdapter(requireContext(), onBoardingData)
         binding.screenPager.adapter = onBoardingViewPagerAdapter
@@ -77,14 +84,20 @@ class OnBoardingFragment : Fragment() {
             }
         })
 
-        binding.btnLogin.setOnClickListener {
-            userPreferences.setOnboardingComplete(true)
-            findNavController().navigate(R.id.action_onBoardingFragment_to_loginFragment)
+        binding.apply {
+            btnLogin.setOnClickListener {
+                userPreferences.setOnboardingComplete(true)
+                findNavController().safeNavigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToLoginFragment())
+            }
+            btnRegister.setOnClickListener {
+                userPreferences.setOnboardingComplete(true)
+                findNavController().safeNavigate(OnBoardingFragmentDirections.actionOnBoardingFragmentToSignUpFragment())
+            }
+
         }
 
-        binding.btnRegister.setOnClickListener {
-            userPreferences.setOnboardingComplete(true)
-            findNavController().navigate(R.id.action_onBoardingFragment_to_signUpFragment)
-        }
+
+
+
     }
 }

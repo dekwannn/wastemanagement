@@ -80,7 +80,6 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
                     scanAnimator.cancel()
                     classifyImage()
                 }, 3000)
-
             }
 
             btnBack.setOnClickListener {
@@ -163,7 +162,6 @@ class ScanFragment : Fragment(R.layout.fragment_scan) {
             Log.e(TAG, "User is not authenticated")
         }
     }
-
 
     @SuppressLint("SetTextI18n")
     private fun showBottomSheetDialog(result: FloatArray) {

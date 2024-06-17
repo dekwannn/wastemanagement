@@ -43,8 +43,8 @@
     <string name="percentage">50%</string>
     <string name="recommendation">Recommendation</string>
     <string name="date">Date</string>
-    <string name="error_camera_x">camera failed to initialize</string>
-    <string name="image_saved">image saved\n</string>
+    <string name="error_camera_x">Camera failed to initialize</string>
+    <string name="image_saved">Image saved\n</string>
     <string name="have_a_waste_nissue">Have a waste\nissue?</string>
     <string name="minimum_characters">Password must be at least 8 characters</string>
     <string name="about">About</string>
@@ -53,30 +53,33 @@
     <string name="clear_history">Clear all</string>
     <string name="history_empty">Please scan your waste first!</string>
     <string name="welcome">Welcome</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="author">Author</string>
+    <string name="location">Location</string>
+    <string name="detection">Detection</string>
+    <string name="select_language">Select Languange</string>
 
     <string-array name="waste_labels">
         <item>Battery</item>
-        <item>Biological</item>
-        <item>Clothes</item>
         <item>Cardboard</item>
+        <item>Clothes</item>
         <item>Glass</item>
         <item>Metal</item>
+        <item>Non-Recycle</item>
         <item>Paper</item>
         <item>Plastic</item>
-        <item>Non-Recycle</item>
         <item>Shoes</item>
     </string-array>
 
     <string-array name="waste_descriptions">
         <item>Battery waste consists of used batteries, including rechargeable and single-use batteries. Batteries contain heavy metals and toxic chemicals, such as lead, mercury, cadmium, and lithium, which can be harmful to human health and the environment if not disposed of properly. When batteries are not recycled, they often end up in landfills where these hazardous materials can leach into the soil and water, contaminating ecosystems and posing risks to wildlife and humans. Recycling batteries helps recover valuable metals and reduces the environmental impact of battery disposal.</item>
-        <item>Biological waste, also known as organic waste, refers to biodegradable materials such as food scraps, yard waste, and agricultural residues. These materials can be broken down by microorganisms into compost, a nutrient-rich soil amendment used in gardening and agriculture. Composting organic waste helps divert waste from landfills, reduces greenhouse gas emissions from organic decomposition, and enriches soil fertility, promoting sustainable agriculture practices.</item>
-        <item>Clothing waste comprises garments and textiles that are no longer wanted or needed. The fashion industry generates a significant amount of textile waste due to fast fashion trends and consumerism. Recycling clothes through donation, resale, or textile recycling programs can extend their lifespan and reduce the environmental impact of textile production and disposal. Additionally, donating clothes to charities and thrift stores can benefit communities in need and support sustainable fashion initiatives.</item>
         <item>Cardboard waste includes corrugated cardboard boxes, packaging materials, and paperboard products. Cardboard is widely used in shipping and packaging industries, resulting in substantial cardboard waste generation. Recycling cardboard conserves natural resources, reduces energy consumption, and minimizes pollution associated with cardboard production. Cardboard recycling also helps reduce landfill space and greenhouse gas emissions, contributing to environmental sustainability and resource conservation.</item>
+        <item>Clothing waste comprises garments and textiles that are no longer wanted or needed. The fashion industry generates a significant amount of textile waste due to fast fashion trends and consumerism. Recycling clothes through donation, resale, or textile recycling programs can extend their lifespan and reduce the environmental impact of textile production and disposal. Additionally, donating clothes to charities and thrift stores can benefit communities in need and support sustainable fashion initiatives.</item>
         <item>Glass waste consists of glass containers, bottles, and packaging materials. Glass is infinitely recyclable and can be recycled into new glass products with minimal loss of quality or purity. Glass recycling conserves natural resources, saves energy, and reduces pollution associated with glass production. Additionally, recycling glass helps divert waste from landfills and reduces the environmental impact of glass disposal, making it an environmentally friendly packaging option.</item>
         <item>Metal waste includes ferrous and non-ferrous metals such as aluminum, steel, copper, and brass. Metals are highly recyclable materials that can be melted down and reused in various industrial applications. Metal recycling conserves natural resources, reduces energy consumption, and minimizes greenhouse gas emissions associated with metal production from raw materials. Additionally, recycling metal helps prevent metal pollution and reduces the environmental impact of metal disposal.</item>
+        <item>Non-recyclable waste refers to materials that cannot be recycled or are difficult to recycle due to their composition, size, or contamination. Non-recyclable waste includes certain plastics, mixed materials, hazardous waste, and electronic waste. Proper disposal of non-recyclable waste is essential to prevent environmental contamination and public health risks. Depending on the type of waste, disposal methods may include landfilling, incineration, or specialized treatment processes. Minimizing non-recyclable waste generation through waste reduction, reuse, and sustainable product design is crucial for achieving environmental sustainability and resource conservation goals.</item>
         <item>Paper waste encompasses various paper products, including newspapers, magazines, office paper, and cardboard packaging. Paper recycling is an essential part of waste management and resource conservation efforts. Recycling paper helps save trees, conserve water and energy, and reduce pollution associated with paper production. Additionally, paper recycling reduces landfill space and greenhouse gas emissions, making it an environmentally friendly choice for paper disposal.</item>
         <item>Plastic waste comprises a wide range of synthetic polymers used in packaging, consumer products, and industrial applications. Plastic pollution is a significant environmental issue, as plastic waste often ends up in oceans, rivers, and landfills, where it persists for hundreds of years, causing harm to marine life, wildlife, and ecosystems. Recycling plastic helps mitigate plastic pollution, conserve natural resources, and reduce energy consumption associated with plastic production. Additionally, recycling plastic promotes a circular economy model, where plastics are reused, recycled, or repurposed to minimize environmental impact and promote sustainable resource management.</item>
-        <item>Non-recyclable waste refers to materials that cannot be recycled or are difficult to recycle due to their composition, size, or contamination. Non-recyclable waste includes certain plastics, mixed materials, hazardous waste, and electronic waste. Proper disposal of non-recyclable waste is essential to prevent environmental contamination and public health risks. Depending on the type of waste, disposal methods may include landfilling, incineration, or specialized treatment processes. Minimizing non-recyclable waste generation through waste reduction, reuse, and sustainable product design is crucial for achieving environmental sustainability and resource conservation goals.</item>
         <item>Shoes waste consists of unwanted or discarded footwear, including shoes, sneakers, and sandals. Shoes are often made from a variety of materials, including leather, rubber, plastic, and textiles, which can be challenging to recycle due to their complex composition. Recycling shoes through donation, resale, or specialized recycling programs can extend their lifespan and reduce the environmental impact of footwear production and disposal. Additionally, donating shoes to charitable organizations can benefit communities in need and promote sustainable consumption and waste reduction.</item>
     </string-array>
 

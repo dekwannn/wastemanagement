@@ -7,6 +7,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.widi.scan.R
 import com.widi.scan.data.pref.UserPreference
+import com.widi.scan.ui.utils.safeNavigate
 
 class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
 
@@ -22,13 +23,13 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
         view.postDelayed({
             when {
                 auth.currentUser != null -> {
-                    findNavController().navigate(R.id.action_splashScreenFragment_to_homeFragment)
+                    findNavController().safeNavigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToHomeFragment())
                 }
                 userPreferences.isOnboardingComplete() -> {
-                    findNavController().navigate(R.id.action_splashScreenFragment_to_loginFragment)
+                    findNavController().safeNavigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToLoginFragment())
                 }
                 else -> {
-                    findNavController().navigate(R.id.action_splashScreenFragment_to_onBoardingFragment)
+                    findNavController().safeNavigate(SplashScreenFragmentDirections.actionSplashScreenFragmentToOnBoardingFragment())
                 }
             }
         }, SPLASH_TIME_OUT)

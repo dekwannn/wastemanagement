@@ -56,11 +56,9 @@ class HistoryFragment : Fragment() {
                 }
             }
         }
-
-
         historyViewModel.loadAllHistory()
-
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

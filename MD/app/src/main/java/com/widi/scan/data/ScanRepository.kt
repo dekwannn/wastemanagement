@@ -1,14 +1,24 @@
 package com.widi.scan.data
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import com.widi.scan.data.local.HistoryEntity
+import com.widi.scan.data.model.Article
+import com.widi.scan.data.remote.ArticlesResponse
+import com.widi.scan.data.retrofit.ApiConfig
 import kotlinx.coroutines.tasks.await
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ScanRepository {
 
     private val firestore = FirebaseFirestore.getInstance()
+    private val apiService = ApiConfig.getApiService()
 
     suspend fun getAllHistory(): List<HistoryEntity> {
         return getAllHistoryFromFirestore()
@@ -43,6 +53,29 @@ class ScanRepository {
         result.documents.forEach { document ->
             document.reference.delete()
         }
+    }
+
+    fun getArticles(): MutableLiveData<List<Article>?> {
+        val data = MutableLiveData<List<Article>?>()
+
+        apiService.getArticles().enqueue(object : Callback<ArticlesResponse> {
+            override fun onResponse(call: Call<ArticlesResponse>, response: Response<ArticlesResponse>) {
+                if (response.isSuccessful) {
+                    Log.d("ArticleRepository", "Articles fetched successfully")
+                    data.value = response.body()?.data
+                } else {
+                    Log.d("ArticleRepository", "Failed to fetch articles: ${response.code()}")
+                    data.value = null
+                }
+            }
+
+            override fun onFailure(call: Call<ArticlesResponse>, t: Throwable) {
+                Log.d("ArticleRepository", "Error: ${t.message}")
+                data.value = null
+            }
+        })
+
+        return data
     }
 
 }

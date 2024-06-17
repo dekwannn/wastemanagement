@@ -91,10 +91,10 @@
         android:baselineAligned="false">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="319dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_weight="1"
+            android:orientation="vertical"
             tools:ignore="UselessParent">
 
             <TextView
@@ -112,11 +112,12 @@
                 android:id="@+id/textDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="start|end"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/lorem_ipsum"
                 android:textColor="@color/black"
-                android:textSize="12sp"
-                android:layout_marginTop="10dp"/>
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tvRecommendation"
@@ -128,14 +129,15 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/recommendation_text"
                 android:textColor="@color/black"
-                android:textSize="12sp"
-                android:layout_marginTop="10dp"/>
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 

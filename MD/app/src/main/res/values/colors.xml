@@ -6,6 +6,4 @@
     <color name="primary">#20948B</color>
     <color name="background">#F4F4F4</color>
     <color name="grey">#FFEBEBEB</color>
-    <color name="primary_bright">#26A69A</color> <!-- Warna hijau cerah -->
-    <color name="buttonText">#FFFFFF</color> <!-- Warna teks tombol (putih) -->
 </resources>
