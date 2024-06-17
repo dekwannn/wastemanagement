@@ -26,6 +26,7 @@
                 android:layout_marginTop="110dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
+                android:backgroundTint="#7A009688"
                 android:background="@drawable/round_back_secondary_15">
 
                 <ImageView
@@ -51,20 +52,21 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_bold"
                     android:text="@string/have_a_waste_nissue"
+                    android:textColor="@color/white"
                     android:textSize="21sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnScan"
-                    android:layout_width="120dp"
-                    android:layout_height="50dp"
+                    android:layout_width="100dp"
+                    android:layout_height="45dp"
                     android:layout_marginStart="32dp"
                     android:background="@drawable/round_back_primary_30"
                     android:fontFamily="@font/poppins_bold"
                     android:text="@string/app_name"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"
+                    android:textColor="@color/primary"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -102,6 +104,7 @@
                         android:layout_width="65dp"
                         android:layout_height="65dp"
                         android:layout_gravity="center"
+                        android:backgroundTint="#7A009688"
                         android:background="@drawable/cat_background">
 
                         <ImageView
@@ -133,15 +136,18 @@
                         android:layout_width="65dp"
                         android:layout_height="65dp"
                         android:layout_gravity="center"
+                        android:backgroundTint="#7A009688"
                         android:background="@drawable/cat_background">
 
                         <ImageView
                             android:id="@+id/btnLocation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/flocation"
                             android:contentDescription="@string/image"
-                            tools:ignore="MissingConstraints" />
+                            android:src="@drawable/flocation"
+                            tools:ignore="MissingConstraints"
+                            tools:layout_editor_absoluteX="17dp"
+                            tools:layout_editor_absoluteY="18dp" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -164,6 +170,7 @@
                         android:layout_width="65dp"
                         android:layout_height="65dp"
                         android:layout_gravity="center"
+                        android:backgroundTint="#7A009688"
                         android:background="@drawable/cat_background">
 
                         <ImageView
@@ -196,15 +203,18 @@
                         android:layout_width="65dp"
                         android:layout_height="65dp"
                         android:layout_gravity="center"
+                        android:backgroundTint="#7A009688"
                         android:background="@drawable/cat_background">
 
                         <ImageView
                             android:id="@+id/btnHistory"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="23dp"
+                            android:layout_height="27dp"
                             android:contentDescription="@string/history"
                             android:src="@drawable/fhistory"
-                            tools:ignore="MissingConstraints,ImageContrastCheck" />
+                            tools:ignore="MissingConstraints,ImageContrastCheck"
+                            tools:layout_editor_absoluteX="21dp"
+                            tools:layout_editor_absoluteY="19dp" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -272,7 +282,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/hello"
                 android:fontFamily="@font/poppins_semibold"
-                android:textColor="@color/black"
+                android:textColor="#B3000000"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:textSize="20sp"
@@ -287,7 +297,7 @@
                 android:layout_marginStart="20dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="@string/welcome"
-                android:textColor="@color/black"
+                android:textColor="@color/primary"
                 android:textSize="26sp" />
 
             <ImageView
