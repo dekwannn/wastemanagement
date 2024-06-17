@@ -83,7 +83,7 @@ class SettingsFragment : Fragment() {
     }
 
     private fun showLanguageDialog() {
-        val languages = arrayOf("English", "Bahasa Indonesia")
+        val languages = arrayOf("English", "Indonesia")
         val languageCodes = arrayOf("en", "in")
 
         val builder = android.app.AlertDialog.Builder(requireContext())
@@ -101,13 +101,11 @@ class SettingsFragment : Fragment() {
         config.setLocale(locale)
         resources.updateConfiguration(config, resources.displayMetrics)
 
-        // Save the selected language in shared preferences
         val sharedPreferences = activity?.getPreferences(Context.MODE_PRIVATE)
         val editor = sharedPreferences?.edit()
         editor?.putString("SELECTED_LANGUAGE", languageCode)
         editor?.apply()
 
-        // Refresh the activity to apply the new language
         activity?.recreate()
     }
     private fun logout() {
