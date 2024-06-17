@@ -15,7 +15,6 @@ class HomeAdapter(var articles: List<Article>) : RecyclerView.Adapter<HomeAdapte
     inner class ArticleViewHolder(private val binding: CardItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
             binding.tvTitle.text = article.title
-            binding.tvAuthor.text = article.author
             Glide.with(binding.ivImage.context)
                 .load(article.img)
                 .placeholder(R.drawable.empty_image)

@@ -1,6 +1,7 @@
 package com.widi.scan.ui.settings
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,15 +16,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.widi.scan.R
 import com.widi.scan.data.ScanRepository
 import com.widi.scan.databinding.FragmentSettingsBinding
 import com.widi.scan.ui.main.ViewModelFactory
 import com.widi.scan.ui.utils.safeNavigate
+import java.util.Locale
 
 class SettingsFragment : Fragment() {
 
     private var _binding: FragmentSettingsBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
     private lateinit var auth: FirebaseAuth
     private val viewModelFactory: ViewModelProvider.Factory by lazy {
         ViewModelFactory(ScanRepository())
@@ -34,9 +37,9 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        return binding?.root
+        return binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +52,13 @@ class SettingsFragment : Fragment() {
         val currentUser = auth.currentUser
         val userEmail = currentUser?.email ?: "Unknown"
 
-        binding?.email?.text = userEmail
+        binding.email.text = userEmail
 
-        binding?.btnLogout?.setOnClickListener {
+        binding.languageLabel.setOnClickListener {
+            showLanguageDialog()
+        }
+
+        binding.btnLogout.setOnClickListener {
             logout()
         }
     }
@@ -65,7 +72,7 @@ class SettingsFragment : Fragment() {
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val username = document.getString("username")
-                    binding?.userName?.text = username
+                    binding.userName.text = username
                 } else {
                     Log.d(TAG, "No such document")
                 }
@@ -75,6 +82,34 @@ class SettingsFragment : Fragment() {
             }
     }
 
+    private fun showLanguageDialog() {
+        val languages = arrayOf("English", "Bahasa Indonesia")
+        val languageCodes = arrayOf("en", "in")
+
+        val builder = android.app.AlertDialog.Builder(requireContext())
+        builder.setTitle(R.string.select_language)
+        builder.setItems(languages) { _, which ->
+            setLocale(languageCodes[which])
+        }
+        builder.show()
+    }
+
+    private fun setLocale(languageCode: String) {
+        val locale = Locale(languageCode)
+        Locale.setDefault(locale)
+        val config = resources.configuration
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+
+        // Save the selected language in shared preferences
+        val sharedPreferences = activity?.getPreferences(Context.MODE_PRIVATE)
+        val editor = sharedPreferences?.edit()
+        editor?.putString("SELECTED_LANGUAGE", languageCode)
+        editor?.apply()
+
+        // Refresh the activity to apply the new language
+        activity?.recreate()
+    }
     private fun logout() {
 
         auth.signOut()

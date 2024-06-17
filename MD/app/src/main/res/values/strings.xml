@@ -43,8 +43,8 @@
     <string name="percentage">50%</string>
     <string name="recommendation">Recommendation</string>
     <string name="date">Date</string>
-    <string name="error_camera_x">camera failed to initialize</string>
-    <string name="image_saved">image saved\n</string>
+    <string name="error_camera_x">Camera failed to initialize</string>
+    <string name="image_saved">Image saved\n</string>
     <string name="have_a_waste_nissue">Have a waste\nissue?</string>
     <string name="minimum_characters">Password must be at least 8 characters</string>
     <string name="about">About</string>
@@ -55,6 +55,9 @@
     <string name="welcome">Welcome</string>
     <string name="upload_image">Upload Image</string>
     <string name="author">Author</string>
+    <string name="location">Location</string>
+    <string name="detection">Detection</string>
+    <string name="select_language">Select Languange</string>
 
     <string-array name="waste_labels">
         <item>Battery</item>

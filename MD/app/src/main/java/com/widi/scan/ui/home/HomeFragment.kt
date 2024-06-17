@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.FrameLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
@@ -21,8 +20,6 @@ import com.google.firebase.ktx.Firebase
 import com.widi.scan.R
 import com.widi.scan.data.ScanRepository
 import com.widi.scan.databinding.FragmentHomeBinding
-import com.widi.scan.ui.articles.ArticleAdapter
-import com.widi.scan.ui.articles.ArticleViewModel
 import com.widi.scan.ui.main.ViewModelFactory
 import com.widi.scan.ui.utils.safeNavigate
 
@@ -40,7 +37,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): FrameLayout? {
+    ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding?.root
     }
@@ -63,13 +60,19 @@ class HomeFragment : Fragment() {
                 findNavController().safeNavigate(HomeFragmentDirections.actionHomeFragmentToScanFragment())
             }
             btnCamera.setOnClickListener {
-                findNavController().safeNavigate(HomeFragmentDirections.actionHomeFragmentToCameraFragment())
+                findNavController().safeNavigate(HomeFragmentDirections.actionHomeFragmentToScanFragment())
+            }
+            btnLocation.setOnClickListener{
+                findNavController().safeNavigate(HomeFragmentDirections.actionHomeFragmentToMapsFragment())
             }
             btnArticles.setOnClickListener {
                  findNavController().safeNavigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment2())
             }
             btnHistory.setOnClickListener {
                 findNavController().safeNavigate(HomeFragmentDirections.actionHomeFragmentToHistoryFragment())
+            }
+            btnCategory.setOnClickListener {
+                findNavController().safeNavigate(HomeFragmentDirections.actionHomeFragmentToArticleFragment2())
             }
         }
 
@@ -80,11 +83,8 @@ class HomeFragment : Fragment() {
 
         homeViewModel.getArticles().observe(viewLifecycleOwner) { articles ->
             if (articles != null) {
-                Log.d("ArticleFragment", "Articles received: ${articles.size}")
                 homeAdapter.articles = articles
                 homeAdapter.notifyDataSetChanged()
-            } else {
-                Log.d("ArticleFragment", "No articles received")
             }
         }
 
@@ -107,8 +107,6 @@ class HomeFragment : Fragment() {
                 if (document != null && document.exists()) {
                     val username = document.getString("username")
                     binding?.tvUsername?.text = username
-                } else {
-                    Log.d(FragmentManager.TAG, "No such document")
                 }
             }
             .addOnFailureListener { exception ->
