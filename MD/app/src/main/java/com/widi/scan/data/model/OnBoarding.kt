@@ -1,4 +1,4 @@
-package com.widi.scan.model
+package com.widi.scan.data.model
 
 data class OnBoarding(
     val title: String,

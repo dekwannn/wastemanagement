@@ -271,7 +271,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/poppins_bold"
-                    android:text="@string/categories"
+                    android:text="@string/articles"
                     android:textSize="19sp" />
 
                 <TextView
@@ -296,6 +296,7 @@
                 android:layout_marginEnd="15dp"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 tools:listitem="@layout/card_item" />
+
         </LinearLayout>
     </ScrollView>
 </FrameLayout>

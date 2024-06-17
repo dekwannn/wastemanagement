@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.viewpager2.widget.ViewPager2
 import androidx.recyclerview.widget.RecyclerView
 import com.widi.scan.R
-import com.widi.scan.model.OnBoarding
+import com.widi.scan.data.model.OnBoarding
 
 class OnBoardingViewPagerAdapter(private val context: Context, private val onBoardingDataList: List<OnBoarding>) : RecyclerView.Adapter<OnBoardingViewPagerAdapter.OnBoardingViewHolder>() {
 

@@ -11,12 +11,19 @@ import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.widi.scan.R
+import com.widi.scan.data.ScanRepository
 import com.widi.scan.databinding.FragmentHomeBinding
+import com.widi.scan.ui.articles.ArticleAdapter
+import com.widi.scan.ui.articles.ArticleViewModel
+import com.widi.scan.ui.main.ViewModelFactory
 import com.widi.scan.ui.utils.safeNavigate
 
 
@@ -24,6 +31,11 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding
+    private lateinit var homeAdapter: HomeAdapter
+    private val viewModelFactory: ViewModelProvider.Factory by lazy {
+        ViewModelFactory(ScanRepository())
+    }
+    private val homeViewModel: HomeViewModel by viewModels { viewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +44,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding?.root
     }
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -57,6 +70,21 @@ class HomeFragment : Fragment() {
             }
             btnHistory.setOnClickListener {
                 findNavController().safeNavigate(HomeFragmentDirections.actionHomeFragmentToHistoryFragment())
+            }
+        }
+
+        homeAdapter = HomeAdapter(emptyList())
+
+        binding?.rvArticles?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        binding?.rvArticles?.adapter = homeAdapter
+
+        homeViewModel.getArticles().observe(viewLifecycleOwner) { articles ->
+            if (articles != null) {
+                Log.d("ArticleFragment", "Articles received: ${articles.size}")
+                homeAdapter.articles = articles
+                homeAdapter.notifyDataSetChanged()
+            } else {
+                Log.d("ArticleFragment", "No articles received")
             }
         }
 

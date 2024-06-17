@@ -53,6 +53,8 @@
     <string name="clear_history">Clear all</string>
     <string name="history_empty">Please scan your waste first!</string>
     <string name="welcome">Welcome</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="author">Author</string>
 
     <string-array name="waste_labels">
         <item>Battery</item>
