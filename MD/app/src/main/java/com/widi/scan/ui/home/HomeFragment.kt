@@ -27,7 +27,7 @@ import com.widi.scan.ui.utils.safeNavigate
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding
+    private val binding get() = _binding!!
     private lateinit var homeAdapter: HomeAdapter
     private val viewModelFactory: ViewModelProvider.Factory by lazy {
         ViewModelFactory(ScanRepository())
@@ -37,9 +37,9 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding?.root
+        return binding.root
     }
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,10 +52,15 @@ class HomeFragment : Fragment() {
             loadUserDataFromFirestore(userId)
         }
 
-        binding?.relativeLayout?.startAnimation(fadeIn)
-        binding?.scrollView?.startAnimation(fadeIn)
+        homeAdapter = HomeAdapter(emptyList())
 
-        binding?.apply {
+        binding.apply {
+            relativeLayout.startAnimation(fadeIn)
+            binding.scrollView.startAnimation(fadeIn)
+
+            rvArticles.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            rvArticles.adapter = homeAdapter
+
             btnScan.setOnClickListener {
                 findNavController().safeNavigate(HomeFragmentDirections.actionHomeFragmentToScanFragment())
             }
@@ -76,16 +81,15 @@ class HomeFragment : Fragment() {
             }
         }
 
-        homeAdapter = HomeAdapter(emptyList())
-
-        binding?.rvArticles?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        binding?.rvArticles?.adapter = homeAdapter
-
         homeViewModel.getArticles().observe(viewLifecycleOwner) { articles ->
             if (articles != null) {
                 homeAdapter.articles = articles
                 homeAdapter.notifyDataSetChanged()
             }
+        }
+
+        homeViewModel.loading.observe(viewLifecycleOwner) { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(

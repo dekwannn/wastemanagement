@@ -18,7 +18,7 @@ class WasteClassification(context: Context) {
     private val DIM_PIXEL_SIZE = 3
     private val IMAGE_MEAN = 127.5f
     private val IMAGE_STD = 127.5f
-    private val NUM_CLASSES = 9  // Adjust this according to your model
+    private val NUM_CLASSES = 9
 
     init {
         tflite = Interpreter(loadModelFile(context))

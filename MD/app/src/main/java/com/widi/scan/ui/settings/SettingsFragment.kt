@@ -52,14 +52,17 @@ class SettingsFragment : Fragment() {
         val currentUser = auth.currentUser
         val userEmail = currentUser?.email ?: "Unknown"
 
-        binding.email.text = userEmail
-
-        binding.languageLabel.setOnClickListener {
-            showLanguageDialog()
-        }
-
-        binding.btnLogout.setOnClickListener {
-            logout()
+        binding.apply {
+            email.text = userEmail
+            languageLabel.setOnClickListener {
+                showLanguageDialog()
+            }
+            btnLogout.setOnClickListener {
+                logout()
+            }
+            aboutLabel.setOnClickListener {
+                findNavController().safeNavigate(SettingsFragmentDirections.actionSettingsFragmentToAboutFragment())
+            }
         }
     }
 
