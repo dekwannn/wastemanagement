@@ -1,10 +1,7 @@
 package com.widi.scan.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -29,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         binding.navView.setupWithNavController(navHostController)
 
         navHostController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.splashScreenFragment || destination.id == R.id.onBoardingFragment || destination.id == R.id.scanFragment
+            if (destination.id == R.id.splashScreenFragment || destination.id == R.id.onBoardingFragment || destination.id == R.id.scanFragment || destination.id == R.id.aboutFragment
                 || destination.id == R.id.loginFragment || destination.id == R.id.signUpFragment || destination.id == R.id.cameraFragment || destination.id == R.id.mapsFragment)
             {
                 binding.navView.visibility = View.GONE

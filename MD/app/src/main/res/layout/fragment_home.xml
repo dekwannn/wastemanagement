@@ -51,6 +51,7 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_bold"
                     android:text="@string/have_a_waste_nissue"
+                    android:textColor="@color/white"
                     android:textSize="21sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -60,11 +61,11 @@
                     android:layout_width="120dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="32dp"
-                    android:background="@drawable/round_back_primary_30"
+                    android:background="@drawable/round_back_white_15"
                     android:fontFamily="@font/poppins_bold"
                     android:text="@string/app_name"
                     android:textAllCaps="false"
-                    android:textColor="@color/white"
+                    android:textColor="@color/primary"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -139,9 +140,9 @@
                             android:id="@+id/btnLocation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/flocation"
                             android:contentDescription="@string/image"
-                            tools:ignore="MissingConstraints" />
+                            android:src="@drawable/flocation"
+                            tools:ignore="MissingConstraints"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -218,44 +219,64 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="10dp"
+               android:layout_marginStart="5dp"
+               android:layout_marginEnd="5dp">
 
-                <TextView
-                    android:id="@+id/tvArticles"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="@string/articles"
-                    android:textSize="19sp" />
+               <TextView
+                   android:id="@+id/tvArticles"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_marginEnd="239dp"
+                   android:layout_weight="1"
+                   android:fontFamily="@font/poppins_bold"
+                   android:text="@string/articles"
+                   android:textSize="19sp"
+                   app:layout_constraintBottom_toTopOf="@+id/rvArticles"
+                   app:layout_constraintEnd_toStartOf="@+id/btnCategory"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintVertical_bias="0.0" />
 
-                <TextView
-                    android:id="@+id/btnCategory"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="15dp"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:text="@string/see_all"
-                    android:textColor="#0000FF"
-                    android:textSize="12sp" />
-            </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rvArticles"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:layout_marginStart="7dp"
-                android:layout_marginEnd="15dp"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/card_item" />
+               <TextView
+                   android:id="@+id/btnCategory"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:fontFamily="@font/poppins_semibold"
+                   android:text="@string/see_all"
+                   android:textColor="#0000FF"
+                   android:textSize="12sp"
+                   app:layout_constraintBottom_toTopOf="@+id/rvArticles"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintVertical_bias="0.41" />
+
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/rvArticles"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:clipToPadding="false"
+                   android:orientation="horizontal"
+                   app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                   app:layout_constraintTop_toBottomOf="@+id/tvArticles"
+                   tools:listitem="@layout/card_item" />
+
+               <ProgressBar
+                   android:id="@+id/progressBar"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center"
+                   android:visibility="gone"
+                   app:layout_constraintBottom_toBottomOf="@+id/rvArticles"
+                   app:layout_constraintEnd_toEndOf="@+id/rvArticles"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/tvArticles" />
+
+           </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 
@@ -272,7 +293,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/hello"
                 android:fontFamily="@font/poppins_semibold"
-                android:textColor="@color/black"
+                android:textColor="#B3000000"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="20dp"
                 android:textSize="20sp"
@@ -287,7 +308,7 @@
                 android:layout_marginStart="20dp"
                 android:fontFamily="@font/poppins_bold"
                 android:text="@string/welcome"
-                android:textColor="@color/black"
+                android:textColor="@color/primary"
                 android:textSize="26sp" />
 
             <ImageView
@@ -306,8 +327,8 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="90dp"
                 android:layout_marginBottom="20dp"
-                app:dividerColor="@color/grey"
-                android:layout_height="2dp" />
+                app:dividerColor="@color/primary"
+                android:layout_height="1dp" />
         </RelativeLayout>
     </FrameLayout>
 

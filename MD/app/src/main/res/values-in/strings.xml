@@ -22,7 +22,7 @@
     <string name="your_web_client_id">597489190587-1gfmgo447bfq16mr3ss5nvjavradr1jl.apps.googleusercontent.com</string>
     <string name="hello">Halo,</string>
     <string name="username">Nama Pengguna</string>
-    <string name="featured">Unggulan</string>
+    <string name="featured">Fitur</string>
     <string name="camera">Kamera</string>
     <string name="image">Gambar</string>
     <string name="articles">Artikel</string>
@@ -36,28 +36,27 @@
     <string name="settings">Pengaturan</string>
     <string name="hello_blank_fragment">Halo fragmen kosong</string>
     <string name="personalization">Personalisasi</string>
-    <string name="dark_mode">Mode Gelap</string>
     <string name="language">Bahasa</string>
     <string name="recycle">Daur Ulang</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua......</string>
     <string name="percentage">50%</string>
     <string name="recommendation">Rekomendasi</string>
     <string name="date">Tanggal</string>
-    <string name="error_camera_x">kamera gagal diinisialisasi</string>
-    <string name="image_saved">gambar tersimpan\n</string>
+    <string name="error_camera_x">Kamera gagal diinisialisasi</string>
+    <string name="image_saved">Gambar tersimpan\n</string>
     <string name="have_a_waste_nissue">Punya masalah\nsampah?</string>
     <string name="minimum_characters">Kata sandi harus minimal 8 karakter</string>
     <string name="about">Tentang</string>
     <string name="no_data">Tidak ada data</string>
     <string name="recommendation_text">Klik TOMBOL untuk mengetahui lokasi pengumpul sampah terdekat</string>
     <string name="clear_history">Hapus semua</string>
-    <string name="history_empty">Harap scan limbah Anda terlebih dahulu!</string>
+    <string name="history_empty">Harap anda lakukan scan terlebih dahulu!</string>
     <string name="welcome">Selamat Datang</string>
     <string name="upload_image">Unggah Gambar</string>
-    <string name="author">Penulis</string>
     <string name="location">Lokasi</string>
     <string name="detection">Deteksi</string>
     <string name="select_language">Pilih Bahasa</string>
+    <string name="about_scan">SCAN (Smart Classification with Automated Neural Network) Virtual Waste Manager menawarkan solusi revolusioner dengan mendeteksi dan mengkategorikan item-item yang dapat didaur ulang secara akurat. Aplikasi ini memanfaatkan teknologi canggih, khususnya kecerdasan buatan (artificial intelligence) dan pembelajaran mesin (machine learning), untuk menyederhanakan proses pengelolaan limbah. Aplikasi ini memiliki fitur deteksi gambar, lokasi terdekat, riwayat, artikel, dan dukungan untuk berbagai bahasa.</string>
 
     <string-array name="waste_labels">
         <item>Baterai</item>

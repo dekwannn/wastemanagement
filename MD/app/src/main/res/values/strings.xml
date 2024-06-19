@@ -58,6 +58,15 @@
     <string name="location">Location</string>
     <string name="detection">Detection</string>
     <string name="select_language">Select Languange</string>
+    <string name="about_scan">SCAN (Smart Classification with Automated Neural Network) Virtual Waste Manager offers a groundbreaking solution by accurately detecting and categorizing recyclable items. This application harnesses advanced technology, particularly artificial intelligence and machine learning, to streamline waste management processes. This application have a feature like detection image, nearest location, history, articles and multiple language</string>
+    <string name="team" translatable="false">Team ID: C241-PS119</string>
+    <string name="team_1">- (MD) A298D4KY4248 – Kadek Widiadnyana</string>
+    <string name="team_2">- (MD) A298D4KY3945 – Arteddy Rover Bukit</string>
+    <string name="team_3">- (ML) M009D4KY2657– Bagus Pandu Wijaya</string>
+    <string name="team_4">- (ML) M200D4KY2358 – Rifqi Khairullah Muhamad.</string>
+    <string name="team_5">- (ML) M200D4KY3244 – Anggun Sulis Setyawan</string>
+    <string name="team_6">- (CC) C009D4KY1124 – Mohammad Robbani</string>
+    <string name="team_7">- (CC) C009D4KY0304 – Hilal Rizaki</string>
 
     <string-array name="waste_labels">
         <item>Battery</item>

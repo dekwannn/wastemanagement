@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.widi.scan.R
 import com.widi.scan.data.model.Article
 import com.widi.scan.databinding.ArticlesItemBinding
 
@@ -17,6 +18,7 @@ class ArticleAdapter(var articles: List<Article>) : RecyclerView.Adapter<Article
             binding.articleDescription.text = article.content
             Glide.with(binding.articleImage.context)
                 .load(article.img)
+                .placeholder(R.drawable.empty_image)
                 .into(binding.articleImage)
             binding.root.setOnClickListener {
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(article.url))
