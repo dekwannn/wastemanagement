@@ -110,7 +110,7 @@ class HomeFragment : Fragment() {
             .addOnSuccessListener { document ->
                 if (document != null && document.exists()) {
                     val username = document.getString("username")
-                    binding?.tvUsername?.text = username
+                    binding.tvUsername.text = username
                 }
             }
             .addOnFailureListener { exception ->
