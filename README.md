@@ -1,8 +1,8 @@
-# SCAN
+# SCAN (Smart Classification with Automated Neural Network)
 
 ![SCAN](LOGO_PROJECT_PLAN_SCAN.png)
 
-Deskripsi singkat tentang proyek Anda dan tujuannya.
+Smart Classification with Automated Neural Network
 
 ## Daftar Isi
 
