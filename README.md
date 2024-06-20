@@ -41,19 +41,19 @@ SCAN (Smart Classification with Automated Neural Network) Virtual Waste Manager 
  
       * **Take an image from camera**, you can take image from camera in preparation for uploading an image to detect a waste.
 
-      * **scan image to get prediction**, after you prepare the image, you can click the result button to detect the image is recycle or non-recycle.     
+      * **Scan image to get prediction**, after you prepare the image, you can click the result button to detect the image is recycle or non-recycle.     
       * **Find nearby waste collector**, You can see the nearest waste collector from your location , This is useful for helping you find the nearest waste collector in your location so that it is faster to get the first.
-     * **popular waste related article**,  in this application you can read articles about waste management
+     * **Popular waste related article**,  in this application you can read articles about waste management.
 
 
 * #### Dependencies :
-  - [Navigation Component] 
-  - [Retrofit]  
-  - [Glide] 
-  - [Material Component]  
-  - [CameraX] 
-  - [TensorFlow Lite]
-  - [Google Play services Maps]
+  - Navigation Component
+  - Retrofit  
+  - Glide
+  - Material Component  
+  - CameraX 
+  - TensorFlow Lite
+  - Google Play services Maps
   ### Getting Started Application
 
   - ### Prerequisites
@@ -74,7 +74,12 @@ SCAN (Smart Classification with Automated Neural Network) Virtual Waste Manager 
 ## Cloud Computing Documentation
 
 ## Demo Application
-
+<p align="center"> 
+    <img src="https://drive.google.com/file/d/1HIYyul5i6l0bnTO7QDlyUJJU-kwRDQRB/view?usp=sharing"
+        alt="SplashScreen"    
+        style="margin-right: 10px;"    
+        width="150" />
+</p>
 
 
 <!-- CONTRIBUTING -->
