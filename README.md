@@ -16,10 +16,9 @@ Smart Classification with Automated Neural Network
         <li><a href="#cloud-computing-documentation">Cloud Computing Documentation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#usage">Demo Application</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
 
@@ -38,12 +37,12 @@ SCAN (Smart Classification with Automated Neural Network) Virtual Waste Manager 
 
       * **Onboarding Screen**, there is showcase feature for guides when you first use this application
 
-      * **Pick image from gallery**, you can select an image from the gallery in preparation for uploading an image to detect malignant or benign skin cancer.
+      * **Pick image from gallery**, you can select an image from the gallery in preparation for uploading an image to detect recycle or non-recycle.
  
       * **Take an image from camera**, you can take image from camera in preparation for uploading an image to detect a waste.
 
       * **scan image to get prediction**, after you prepare the image, you can click the result button to detect the image is recycle or non-recycle.     
-* **Find nearby waste collector**, You can see the nearest waste collector from your location , This is useful for helping you find the nearest waste collector in your location so that it is faster to get the first.
+      * **Find nearby waste collector**, You can see the nearest waste collector from your location , This is useful for helping you find the nearest waste collector in your location so that it is faster to get the first.
      * **popular waste related article**,  in this application you can read articles about waste management
 
 
