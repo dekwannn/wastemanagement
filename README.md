@@ -4,15 +4,24 @@
 
 Smart Classification with Automated Neural Network
 
-## Daftar Isi
-
-- [Tentang Proyek](#tentang-proyek)
-- [Fitur](#fitur)
-- [Instalasi](#instalasi)
-- [Penggunaan](#penggunaan)
-- [Kontribusi](#kontribusi)
-- [Lisensi](#lisensi)
-- [Kontak](#kontak)
+<!-- TABLE OF CONTENTS -->
+<details open="open">
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#machine-learning-development-documentation">Machine Learning Development Documentation</a></li>
+        <li><a href="#mobile-development-documentation">Mobile Development Documentation</a></li>
+        <li><a href="#cloud-computing-documentation">Cloud Computing Documentation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
 ## Tentang Proyek
 
