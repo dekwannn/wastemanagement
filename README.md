@@ -74,12 +74,7 @@ SCAN (Smart Classification with Automated Neural Network) Virtual Waste Manager 
 ## Cloud Computing Documentation
 
 ## Demo Application
-<p align="center"> 
-    <img src="https://drive.google.com/file/d/1HIYyul5i6l0bnTO7QDlyUJJU-kwRDQRB/view?usp=sharing"
-        alt="SplashScreen"    
-        style="margin-right: 10px;"    
-        width="150" />
-</p>
+<a href="https://drive.google.com/file/d/1HIYyul5i6l0bnTO7QDlyUJJU-kwRDQRB/view?usp=sharing">Demo Apps</a>
 
 
 <!-- CONTRIBUTING -->
